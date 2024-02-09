@@ -11,4 +11,7 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
-.bin/*
+.project
+/bin
+*.code-workspace
+.vscode
