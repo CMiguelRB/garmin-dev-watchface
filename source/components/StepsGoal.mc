@@ -31,9 +31,9 @@ class StepsGoal extends WatchUi.Drawable {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         }
 
-        dc.drawText(95, 305, Settings.resource(Rez.Fonts.Icons), "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(310, 105, Settings.resource(Rez.Fonts.Icons), "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.drawText(95, 270, Settings.resource(Rez.Fonts.Test), steps, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(310, 140, Settings.resource(Rez.Fonts.Test), steps, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
 
         /* dc.drawText(65, 250, Settings.resource(Rez.Fonts.Icons), "b", Graphics.TEXT_JUSTIFY_CENTER);
@@ -46,11 +46,11 @@ class StepsGoal extends WatchUi.Drawable {
         dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
 
 
-        dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-32, Graphics.ARC_COUNTER_CLOCKWISE, 196, 222);
+        dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-32, Graphics.ARC_COUNTER_CLOCKWISE, 20, 55);
 
         dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
 
-        var diffDegree = 222 - 196;
+        var diffDegree = 55 - 20;
 
         var goalPercentage = (100 * steps / stepsGoal).toFloat();
 
@@ -62,16 +62,16 @@ class StepsGoal extends WatchUi.Drawable {
             completionDegree = diffDegree;
         }
 
-        completionDegree = 222 - completionDegree;
+        completionDegree = 20 + completionDegree;
 
-        if(steps == 0 || stepsGoal == 0){
+        if(steps == 0 || stepsGoal == 0 || completionDegree == 20.0){
             return;
         }
 
-        dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-32, Graphics.ARC_COUNTER_CLOCKWISE, completionDegree, 222);
+        dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-32, Graphics.ARC_COUNTER_CLOCKWISE, 20, completionDegree);
 
-        dc.drawArc(dc.getWidth()/2-43, dc.getWidth()/2-43, 30, Graphics.ARC_COUNTER_CLOCKWISE, 135, 315);
-        dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, 30, Graphics.ARC_COUNTER_CLOCKWISE, 315, 135);
+        //dc.drawArc(dc.getWidth()/2-43, dc.getWidth()/2-43, 30, Graphics.ARC_COUNTER_CLOCKWISE, 135, 315);
+        //dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, 30, Graphics.ARC_COUNTER_CLOCKWISE, 315, 135);
     }
 
     hidden function getX(dc, degree, x, radius) {
