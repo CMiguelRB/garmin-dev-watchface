@@ -11,13 +11,26 @@ class BodyBattery extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var bodyBattery = SensorHistory.getBodyBatteryHistory({:period => 1}).next().data;
+        var bodyBattery = SensorHistory.getBodyBatteryHistory({:period => 1, :order => SensorHistory.ORDER_NEWEST_FIRST}).next().data;
+        bodyBattery = null;
+        if(bodyBattery == null){
+            var iterator = SensorHistory.getBodyBatteryHistory({:period => 100, :order => SensorHistory.ORDER_NEWEST_FIRST});
+            bodyBattery = iterator.next().data;
+            bodyBattery = null;
+            if(bodyBattery == null){
+                while(bodyBattery == null){
+                    bodyBattery = iterator.next().data;
+                }
+            }
+        }
         drawInfo(dc, bodyBattery);
         drawBars(dc, bodyBattery);
     }
 
     hidden function drawInfo(dc, bodyBattery){
-        if(bodyBattery == 100){
+        if(bodyBattery == null){
+            dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+        }else if(bodyBattery == 100){
             dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -44,7 +57,7 @@ class BodyBattery extends WatchUi.Drawable {
             x = x + stepsLength + gap;
         }   
 
-        if(bodyBattery == 0){
+        if(bodyBattery == null || bodyBattery == 0){
             return;
         }
 

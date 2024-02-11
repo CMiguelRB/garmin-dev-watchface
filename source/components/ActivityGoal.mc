@@ -26,7 +26,9 @@ class ActivityGoal extends WatchUi.Drawable {
     }
 
     hidden function drawInfo(dc, activity, activityGoal){
-        if(activity.total > activityGoal){
+        if(activity == null || activityGoal == null){
+            dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+        }else if(activity.total > activityGoal){
             dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -50,6 +52,10 @@ class ActivityGoal extends WatchUi.Drawable {
 
         dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
 
+        if(activity == null || activityGoal == null || activity.total == 0 || activityGoal == 0){
+            return;
+        }
+
         var diffDegree = 360 - 0;
 
         var goalPercentage = (100 * activity.total / activityGoal).toFloat();
@@ -60,9 +66,6 @@ class ActivityGoal extends WatchUi.Drawable {
 
         if(completionDegree > diffDegree){
             completionDegree = diffDegree;
-        }
-        if(activity.total == 0 || activityGoal == 0){
-            return;
         }
 
         dc.drawArc(190, 290, 25, Graphics.ARC_COUNTER_CLOCKWISE, 0, completionDegree);
@@ -116,9 +119,9 @@ class ActivityGoal extends WatchUi.Drawable {
             x = x + stepsLength + gap;
         }   
 
-        if(activity.total == 0 || activityGoal == 0){
-            return;
-        }  
+       if(activity == null || activityGoal == null || activity.total == 0 || activityGoal == 0){
+           return;
+       }
 
         dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
 
