@@ -56,6 +56,23 @@ class FancyLines extends WatchUi.Drawable {
 
         dc.fillPolygon(arrow2);
 
+        dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+
+        var y3End = 88;
+        var x3Start = 75;
+        var x3End = 245;
+
+        var arrow3 = [
+            [x3Start, y3End],            
+            [x3Start+15, y3End-1],
+            [x3End-15, y3End-1],
+            [x3End, y3End],
+            [x3End-15, y3End+1],
+            [x3Start+15, y3End+1]
+        ];
+
+        dc.fillPolygon(arrow3);
+
     }
 
     hidden function getX(dc, degree, x, radius) {
