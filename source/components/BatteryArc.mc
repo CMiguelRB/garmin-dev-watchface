@@ -26,13 +26,14 @@ class BatteryArc extends WatchUi.Drawable {
 
   function update(dc) {
     setAntiAlias(dc, true);
-    var remainingBattery = System.getSystemStats().batteryInDays;
+    var remainingBatteryInDays = System.getSystemStats().batteryInDays;
+    var remainingBattery = System.getSystemStats().battery;
     // draw remaining arc first so it wont overdraw our endpoint
     drawMargin(dc);
     dc.setPenWidth(12);
     drawRemainingArc(dc);
     drawProgressArc(dc, remainingBattery);
-    drawIcon(dc, remainingBattery);
+    drawIcon(dc, remainingBatteryInDays);
 
     setAntiAlias(dc, false);
   }
@@ -121,7 +122,7 @@ class BatteryArc extends WatchUi.Drawable {
       );  
 
     var charArray = remainingBattery.toCharArray() as Array<String>;
-    var offset = - 5;
+    var offset = 0;
 
     for(var i = 0; i < charArray.size() as Number; i++ ){
       dc.drawText(
@@ -146,6 +147,6 @@ class BatteryArc extends WatchUi.Drawable {
   }
 
   hidden function getFillDegree(fillLevel) {
-    return mTotalDegree * fillLevel;
+    return mTotalDegree * fillLevel/100;
   }
 } 
