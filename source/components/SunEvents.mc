@@ -63,9 +63,9 @@ class SunEvents extends WatchUi.Drawable {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);        
 
         dc.drawText(151, 30, Settings.resource(Rez.Fonts.Icons), "l", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(150, 45, Settings.resource(Rez.Fonts.Test), sunrise, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(150, 45, Settings.resource(Rez.Fonts.Data), sunrise, Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(217, 30, Settings.resource(Rez.Fonts.Icons), "m", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(220, 45, Settings.resource(Rez.Fonts.Test), sunset, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(220, 45, Settings.resource(Rez.Fonts.Data), sunset, Graphics.TEXT_JUSTIFY_CENTER);
 
     }
 }

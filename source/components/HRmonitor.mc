@@ -59,7 +59,7 @@ class HRmonitor extends WatchUi.Drawable {
         var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
 
         //Gather samples data
-        var samples = {};                            // get the previous HR
+        var samples = {};
         var sample = hrIterator.next();
         var hrMax = hrIterator.getMax();
         var hrMin = hrIterator.getMin();
@@ -75,7 +75,7 @@ class HRmonitor extends WatchUi.Drawable {
                 innerCounter++;
             }   
             sample = hrIterator.next();
-            counter++;                                                     // null check
+            counter++;
         }     
 
         //Define line x length
@@ -145,7 +145,7 @@ class HRmonitor extends WatchUi.Drawable {
             currentHr = currentHr.format("%i");
         }
 
-        dc.drawText(dc.getWidth() / 2 - 25, dc.getHeight()/2 + dc.getHeight()/4 + 15, Settings.resource(Rez.Fonts.Icons), "f", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2 - 25, dc.getHeight()/2 + dc.getHeight()/4 + 15, Settings.resource(Rez.Fonts.Icons), "o", Graphics.TEXT_JUSTIFY_CENTER);
 
         var charArray = currentHr.toCharArray();
         var hrX = dc.getWidth() / 2;

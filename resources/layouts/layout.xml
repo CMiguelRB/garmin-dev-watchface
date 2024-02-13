@@ -1,0 +1,34 @@
+<layout id="WatchFace">
+	<drawable id="Background" class="Background"/>
+
+  <drawable id="HRmonitor" class="HRmonitor">
+  </drawable>
+
+  <drawable id="DateAndTime" class="DateAndTime">
+    <param name="burnInProtectionMode">false</param>
+  </drawable>
+
+  <drawable id="StepsGoal" class="StepsGoal">
+  </drawable>
+
+  <drawable id="SunEvents" class="SunEvents"></drawable>
+
+   <drawable id="Altitude" class="Altitude">
+  </drawable>
+
+  <drawable id="ActivityGoal" class="ActivityGoal">
+  </drawable> 
+  <drawable id="BodyBattery" class="BodyBattery">
+  </drawable> 
+
+  <drawable id="DailyKms" class="DailyKms">
+  </drawable>
+
+  <drawable id="FancyLines" class="FancyLines">
+  </drawable> 
+
+  <drawable id="BatteryArc" class="BatteryArc">
+    <param name="gapDegree">16</param>
+    <param name="radius">(dc.getWidth() / 2.0)-6</param>
+  </drawable>
+</layout> 

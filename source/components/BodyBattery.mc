@@ -30,12 +30,12 @@ class BodyBattery extends WatchUi.Drawable {
         if(bodyBattery == null){
             dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
         }else if(bodyBattery == 100){
-            dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         }
 
-        dc.drawText(160, 305, Settings.resource(Rez.Fonts.Icons), "d", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(160, 305, Settings.resource(Rez.Fonts.Icons), "n", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, bodyBattery){

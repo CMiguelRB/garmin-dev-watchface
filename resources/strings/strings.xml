@@ -1,0 +1,24 @@
+<strings>
+  <string id="AppName">Garmin Dev</string>
+
+  <string id="DateMonth1">Jan</string>
+  <string id="DateMonth2">Feb</string>
+  <string id="DateMonth3">Mar</string>
+  <string id="DateMonth4">Apr</string>
+  <string id="DateMonth5">May</string>
+  <string id="DateMonth6">Jun</string>
+  <string id="DateMonth7">Jul</string>
+  <string id="DateMonth8">Aug</string>
+  <string id="DateMonth9">Sept</string>
+  <string id="DateMonth10">Oct</string>
+  <string id="DateMonth11">Nov</string>
+  <string id="DateMonth12">Dec</string>
+
+  <string id="DateWeek1">Sun</string>
+  <string id="DateWeek2">Mon</string>
+  <string id="DateWeek3">Tue</string>
+  <string id="DateWeek4">Wed</string>
+  <string id="DateWeek5">Thu</string>
+  <string id="DateWeek6">Fri</string>
+  <string id="DateWeek7">Sat</string>
+</strings>

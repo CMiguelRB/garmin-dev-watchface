@@ -29,7 +29,7 @@ class DailyKms extends WatchUi.Drawable {
 
         var distanceKm = (distance.toFloat() / 100000).format("%.1f");
 
-        dc.drawText(345, 173, Settings.resource(Rez.Fonts.Test), distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(345, 173, Settings.resource(Rez.Fonts.Data), distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, activities, distance){

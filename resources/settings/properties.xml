@@ -1,0 +1,6 @@
+<properties>  
+  <property id="layout" type="number">0</property>
+  <property id="theme" type="number">0</property>
+  
+  <property id="batteryArc" type="number">2</property>
+</properties>
