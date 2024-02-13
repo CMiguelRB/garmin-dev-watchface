@@ -42,12 +42,12 @@ class StepsGoal extends WatchUi.Drawable {
 
         dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
 
-        var startSectionDegree = 25;
+        var startSection = 25;
         var endSection = sectionsLength + startDegree;
 
         for(var i = 0; i<sections;i++){
-            dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSectionDegree, endSection);
-            startSectionDegree = sectionsLength + gap + startSectionDegree;
+            dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
+            startSection = sectionsLength + gap + startSection;
             endSection = endSection + sectionsLength + gap;
         }      
 
@@ -69,17 +69,19 @@ class StepsGoal extends WatchUi.Drawable {
             return;
         }
         
-        startSectionDegree = 25;
-        endSection = sectionsLength + startSectionDegree;
+        startSection = 25;
+        endSection = sectionsLength + startSection;
 
         for(var i = 0; i<sections;i++){
-            if(startSectionDegree + sectionsLength < completionDegree){
-                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSectionDegree, endSection);
+            if(endSection < completionDegree){
+                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
+            }else if(startSection - gap <= completionDegree && completionDegree <= startSection){
+                continue;
             }else{
-                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSectionDegree, completionDegree);
+                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, completionDegree);
                 break;
             }            
-            startSectionDegree = sectionsLength + gap + startSectionDegree;
+            startSection = sectionsLength + gap + startSection;
             endSection = endSection + sectionsLength + gap;
         }     
     }
