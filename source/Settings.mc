@@ -9,6 +9,12 @@ import Toybox.WatchUi;
 
 module Settings {
 
+  var lowPowerMode = false;
+  var isSleepTime = false;
+
+  var _settings as Dictionary<String, Object> = {};
+  var _resources as Dictionary<Symbol, Object> = {};
+
   function get(key) {
     return _settings[key];
   }
@@ -59,12 +65,6 @@ module Settings {
       Settings.isSleepTime = false;
     }
   }
-
-  var lowPowerMode = false;
-  var isSleepTime = false;
-
-  var _settings as Dictionary<String, Object> = {};
-  var _resources as Dictionary<Symbol, Object> = {};
 }
 
 var DataFieldRez as Array<Symbol> = [];

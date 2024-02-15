@@ -44,8 +44,8 @@ class SunEvents extends WatchUi.Drawable {
         if(location != null){
             sunset = Weather.getSunset(location, Time.now());
             sunrise = Weather.getSunrise(location, Time.now());
-            sunset = Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).hour + ":" + Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).min;
-            sunrise = Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).hour + ":" + Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).min;
+            sunset = Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).min.format("%02d");
+            sunrise = Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).min.format("%02d");
         }
         drawInfo(dc, sunrise, sunset);
     }

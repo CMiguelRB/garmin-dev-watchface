@@ -28,7 +28,5 @@
   </drawable> 
 
   <drawable id="BatteryArc" class="BatteryArc">
-    <param name="gapDegree">16</param>
-    <param name="radius">(dc.getWidth() / 2.0)-6</param>
   </drawable>
 </layout> 

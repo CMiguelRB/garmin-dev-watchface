@@ -3,19 +3,22 @@ import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.System;
 
+module mFaceValues {
+    var height;
+    var centerX;
+    var width;
+    var centerY;
+    //BatteryArc
+    var batteryArcRadius;
+    var batteryArcGapDegree;
+}
+
 class GarminDevView extends WatchUi.WatchFace {
 
   var mBurnInProtectionMode = false;
   var mLastUpdateBIPMode = false;
   var mLastUpdateSleepTime = false; 
   hidden var mLastLayout;
-  
-  hidden var mNoProgress1;
-  hidden var mNoProgress2;
-  hidden var mNoProgress3;
-
-  hidden var mActiveHeartrateField;
-  hidden var mActiveHeartrateCounter = 0;
 
   hidden var mSettings;
 
@@ -73,8 +76,13 @@ class GarminDevView extends WatchUi.WatchFace {
 
   // Load your resources here
   function onLayout(dc) {
+    mFaceValues.height = dc.getHeight();
+    mFaceValues.centerY = dc.getHeight()/2;
+    mFaceValues.width = dc.getWidth();
+    mFaceValues.centerX = dc.getWidth()/2;
+    mFaceValues.batteryArcRadius = mFaceValues.centerX - 6;
+    mFaceValues.batteryArcGapDegree = 16;
     setLayout(chooseLayout(dc, true));
-    getDrawableDataFields();
   }
 
   // Called when this View is brought to the foreground. Restore
@@ -85,7 +93,6 @@ class GarminDevView extends WatchUi.WatchFace {
 
   // Update the view
   function onUpdate(dc) {
-    clearClip(dc);
     // Call the parent onUpdate function to redraw the layout
     var layout = chooseLayout(dc, false);
     if (layout != null) {
@@ -130,11 +137,5 @@ class GarminDevView extends WatchUi.WatchFace {
 
   hidden function requiresBurnInProtection() {
     return _settings() has :requiresBurnInProtection && _settings().requiresBurnInProtection;
-  }
-
-  hidden function getDrawableDataFields() {
-    mNoProgress1 = findDrawableById("NoProgressDataField1");
-    mNoProgress2 = findDrawableById("NoProgressDataField2");
-    mNoProgress3 = findDrawableById("NoProgressDataField3");
   }
 }

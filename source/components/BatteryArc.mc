@@ -14,10 +14,10 @@ class BatteryArc extends WatchUi.Drawable {
   function initialize(params as Object) {
     Drawable.initialize(params);
 
-    mStartDegree = 90 - params[:gapDegree];
-    mEndDegree = 90 + params[:gapDegree];
-    mTotalDegree = 360 - params[:gapDegree] * 2;
-    mRadius = params[:radius];
+    mStartDegree = 90 - $.mFaceValues.batteryArcGapDegree;
+    mEndDegree = 90 + $.mFaceValues.batteryArcGapDegree;
+    mTotalDegree = 360 - $.mFaceValues.batteryArcGapDegree * 2;
+    mRadius = $.mFaceValues.batteryArcRadius;
   }
 
   function draw(dc) {    
@@ -138,12 +138,12 @@ class BatteryArc extends WatchUi.Drawable {
 
   hidden function getX(dc, degree) {
     degree = Math.toRadians(degree);
-    return (dc.getHeight()/2).toFloat() + mRadius.toFloat() * Math.cos(degree);
+    return ($.mFaceValues.centerY).toFloat() + mRadius.toFloat() * Math.cos(degree);
   }
 
   hidden function getY(dc, degree) {
     degree = Math.toRadians(degree);
-    return dc.getHeight().toFloat() - ((dc.getHeight()/2).toFloat() + mRadius.toFloat() * Math.sin(degree));
+    return $.mFaceValues.height.toFloat() - (($.mFaceValues.centerY).toFloat() + mRadius.toFloat() * Math.sin(degree));
   }
 
   hidden function getFillDegree(fillLevel) {

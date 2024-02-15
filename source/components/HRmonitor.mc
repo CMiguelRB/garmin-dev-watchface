@@ -145,11 +145,11 @@ class HRmonitor extends WatchUi.Drawable {
             currentHr = currentHr.format("%i");
         }
 
-        dc.drawText(dc.getWidth() / 2 - 25, dc.getHeight()/2 + dc.getHeight()/4 + 15, Settings.resource(Rez.Fonts.Icons), "o", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText($.mFaceValues.centerX - 25, $.mFaceValues.centerY + dc.getHeight()/4 + 15, Settings.resource(Rez.Fonts.Icons), "o", Graphics.TEXT_JUSTIFY_CENTER);
 
         var charArray = currentHr.toCharArray();
-        var hrX = dc.getWidth() / 2;
-        var hrY = dc.getHeight()/2 + 130;
+        var hrX = $.mFaceValues.centerX;
+        var hrY = $.mFaceValues.centerY + 130;
         var offset = 0;
 
         for(var i = 0; i < charArray.size(); i++ ){

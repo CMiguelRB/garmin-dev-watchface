@@ -75,6 +75,8 @@ class BodyBattery extends WatchUi.Drawable {
         for(var i = 0; i< steps; i++){
             if(x + stepsLength < startX + completionX){
                 dc.fillPolygon([[x,310], [x+10,295], [x+stepsLength+10,295], [x+stepsLength,310]]);
+            }else if(x - gap <= completionX + startX && completionX + startX <= x){
+                continue;
             }else{
                 dc.fillPolygon([[x,310], [x+10,295], [startX + completionX+10,295], [startX + completionX,310]]);
                 break;

@@ -37,9 +37,3 @@ function setAntiAlias(dc, enabled as Lang.Boolean) as Void {
     dc.setAntiAlias(enabled);
   }
 }
-
-function clearClip(dc) as Void {
-  if (Graphics.Dc has :clearClip) {
-    dc.clearClip();
-  }
-}

@@ -78,6 +78,8 @@ class ActivityGoal extends WatchUi.Drawable {
         for(var i = 0; i< steps; i++){
             if(x + stepsLength < startX + completionX){
                 dc.fillPolygon([[x,y1], [x+10,y2], [x+stepsLength+10,y2], [x+stepsLength,y1]]);
+            }else if(x - gap <= completionX + startX && completionX + startX <= x){
+                continue;
             }else{
                 dc.fillPolygon([[x,y1], [x+10,y2], [startX + completionX+10,y2], [startX + completionX,y1]]);
                 break;
