@@ -11,6 +11,15 @@ module mFaceValues {
     //BatteryArc
     var batteryArcRadius;
     var batteryArcGapDegree;
+    var batteryInPercentage;
+    var batteryInDays;
+    //SunEvents
+    var sunrise;
+    var sunset;
+    var lastSunEventsRetrieval;
+    var updateSunEvents = false;
+    //location
+    var lastLocation;
 }
 
 class GarminDevView extends WatchUi.WatchFace {
@@ -76,10 +85,12 @@ class GarminDevView extends WatchUi.WatchFace {
 
   // Load your resources here
   function onLayout(dc) {
+    //General values
     mFaceValues.height = dc.getHeight();
     mFaceValues.centerY = dc.getHeight()/2;
     mFaceValues.width = dc.getWidth();
     mFaceValues.centerX = dc.getWidth()/2;
+    //BodyBattery
     mFaceValues.batteryArcRadius = mFaceValues.centerX - 6;
     mFaceValues.batteryArcGapDegree = 16;
     setLayout(chooseLayout(dc, true));
@@ -101,6 +112,9 @@ class GarminDevView extends WatchUi.WatchFace {
     if(dc has :setAntiAlias) {
         dc.setAntiAlias(true);
     }
+    DataRetriever.getBattery();  
+    DataRetriever.getLocation();
+    DataRetriever.getSunEvents();
     View.onUpdate(dc);
   }
 

@@ -10,6 +10,8 @@ class BatteryArc extends WatchUi.Drawable {
   hidden var mEndDegree;
   hidden var mTotalDegree;
   hidden var mRadius;
+  hidden var remainingBatteryInDays;
+  hidden var remainingBattery;
 
   function initialize(params as Object) {
     Drawable.initialize(params);
@@ -21,34 +23,16 @@ class BatteryArc extends WatchUi.Drawable {
   }
 
   function draw(dc) {    
-    update(dc);
-  }
-
-  function update(dc) {
-    setAntiAlias(dc, true);
-    var remainingBatteryInDays = System.getSystemStats().batteryInDays;
-    var remainingBattery = System.getSystemStats().battery;
-    // draw remaining arc first so it wont overdraw our endpoint
-    drawMargin(dc);
+    var remainingBatteryInDays = $.mFaceValues.batteryInDays;
+    var remainingBattery = $.mFaceValues.batteryInPercentage;
     dc.setPenWidth(12);
     drawRemainingArc(dc);
     drawProgressArc(dc, remainingBattery);
     drawIcon(dc, remainingBatteryInDays);
-
-    setAntiAlias(dc, false);
   }
 
-  hidden function drawMargin(dc){
-    dc.setPenWidth(20);
-    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-    dc.drawArc(
-        dc.getWidth()/2,
-        dc.getHeight()/2,
-        mRadius+8,
-        Graphics.ARC_CLOCKWISE,
-        0,
-        360
-      );
+  function update(dc) {
+    drawIcon(dc, remainingBatteryInDays);
   }
 
   hidden function drawProgressArc(dc, fillLevel) {
@@ -61,8 +45,8 @@ class BatteryArc extends WatchUi.Drawable {
       drawEndpoint(dc, endDegree, 0, 0);
 
       dc.drawArc(
-        dc.getWidth()/2,
-        dc.getHeight()/2,
+        $.mFaceValues.centerX,
+        $.mFaceValues.centerY,
         mRadius,
         Graphics.ARC_CLOCKWISE,
         mStartDegree,
@@ -78,8 +62,8 @@ class BatteryArc extends WatchUi.Drawable {
     drawEndpoint(dc, mEndDegree, 0, 0);
 
     dc.drawArc(
-      dc.getWidth()/2,
-      dc.getHeight()/2,
+      $.mFaceValues.centerX,
+      $.mFaceValues.centerY,
       mRadius,
       Graphics.ARC_CLOCKWISE,
       mStartDegree,
@@ -103,7 +87,7 @@ class BatteryArc extends WatchUi.Drawable {
       dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
     }
 
-    var  x = dc.getWidth()/2;
+    var  x = $.mFaceValues.centerX;
     var  y = 15; 
     
 

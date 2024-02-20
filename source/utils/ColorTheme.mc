@@ -31,9 +31,3 @@ function themeColor(sectionId as Lang.Number) as Lang.Number {
   var theme = 0;
   return Color._COLORS[(theme * Color.MAX_COLOR_ID) + sectionId];
 }
-
-function setAntiAlias(dc, enabled as Lang.Boolean) as Void {
-  if (Graphics.Dc has :setAntiAlias) {
-    dc.setAntiAlias(enabled);
-  }
-}

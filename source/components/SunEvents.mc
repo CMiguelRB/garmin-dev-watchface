@@ -15,49 +15,19 @@ class SunEvents extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var location = Activity.getActivityInfo().currentLocation;
-        var sunset = null;
-        var sunrise = null;
-        if(location != null){
-            Application.Storage.setValue("lastLocation", location.toDegrees()[0]+"#"+location.toDegrees()[1]);
-        }
-        if(location == null){
-            var wcc = Weather.getCurrentConditions();
-            if (wcc != null && wcc.observationLocationPosition != null) {
-                location = wcc.observationLocationPosition;
-                Application.Storage.setValue("lastLocation", location.toDegrees()[0]+"#"+location.toDegrees()[1]);
-            }
-        }
-        location = null;
-        if(location == null){
-            var lastLocation = Application.Storage.getValue("lastLocation");
-            if(lastLocation != null){
-                var locationLat = lastLocation.substring(0,lastLocation.find("#"));
-                var locationLon = lastLocation.substring(lastLocation.find("#")+1,lastLocation.length());
-                location = new Position.Location({
-                        :latitude => locationLat.toDouble(),
-                        :longitude => locationLon.toDouble(),
-                        :format => :degrees
-                    });
-            }
-        }
-        if(location != null){
-            sunset = Weather.getSunset(location, Time.now());
-            sunrise = Weather.getSunrise(location, Time.now());
-            sunset = Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).min.format("%02d");
-            sunrise = Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).min.format("%02d");
-        }
+        var sunrise = $.mFaceValues.sunrise;
+        var sunset = $.mFaceValues.sunset;
         drawInfo(dc, sunrise, sunset);
     }
 
     hidden function drawInfo(dc, sunrise, sunset){
 
         if(sunrise == null){
-            sunrise = "--:--";
+            sunrise = "00:00";
         }
 
         if(sunset == null){
-            sunset = "--:--";
+            sunset = "00:00";
         }
         
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);        
