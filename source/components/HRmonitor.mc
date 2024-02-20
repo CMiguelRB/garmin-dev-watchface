@@ -57,7 +57,7 @@ class HRmonitor extends WatchUi.Drawable {
 
     hidden function getHrPoints(height){    
 
-        var samples = $.mFaceValues.hrSamples;
+        var samples = $.mFaceValues.hrSamples as Array<Number>;
         var hrMax = $.mFaceValues.hrMin;
         var hrMin = $.mFaceValues.hrMax;
         var innerCounter = $.mFaceValues.hrSamplesCounter;
@@ -131,7 +131,7 @@ class HRmonitor extends WatchUi.Drawable {
 
         dc.drawText($.mFaceValues.centerX - 25, $.mFaceValues.centerY + dc.getHeight()/4 + 15, Settings.resource(Rez.Fonts.Icons), "o", Graphics.TEXT_JUSTIFY_CENTER);
 
-        var charArray = currentHr.toCharArray();
+        var charArray = currentHr.toCharArray() as Array<Char>;
         var hrX = $.mFaceValues.centerX;
         var hrY = $.mFaceValues.centerY + 130;
         var offset = 0;
