@@ -17,7 +17,7 @@ class HRmonitor extends WatchUi.Drawable {
         Drawable.initialize(params);
 
         mWmin = 12;
-        mWmax = Settings.get("width") - 12;
+        mWmax = $.mFaceValues.width - 12;
         mWdiff = mWmax - mWmin;
         mHmax = 55;
         mHmin = 35;
@@ -31,7 +31,7 @@ class HRmonitor extends WatchUi.Drawable {
 
         //Draw HR chart        
 
-        var points = getHrPoints(Settings.get("height")) as Array<Array>;
+        var points = getHrPoints($.mFaceValues.height) as Array<Array>;
 
         var polyPoints = points[1] as Array<Array>;
         var linePoints = points[0] as Array<Number>;
@@ -55,34 +55,18 @@ class HRmonitor extends WatchUi.Drawable {
         }
     }
 
-    hidden function getHrPoints(height){
-        var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
+    hidden function getHrPoints(height){    
 
-        //Gather samples data
-        var samples = {};
-        var sample = hrIterator.next();
-        var hrMax = hrIterator.getMax();
-        var hrMin = hrIterator.getMin();
-        var counter = 0;
-        var innerCounter = 0;
-        while (sample != null) {
-            if(counter % 5 == 0){
-                if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-                        samples[innerCounter] = sample.heartRate;
-                }else{
-                    samples[innerCounter] = null;
-                }    
-                innerCounter++;
-            }   
-            sample = hrIterator.next();
-            counter++;
-        }     
+        var samples = $.mFaceValues.hrSamples;
+        var hrMax = $.mFaceValues.hrMin;
+        var hrMin = $.mFaceValues.hrMax;
+        var innerCounter = $.mFaceValues.hrSamplesCounter;
 
         //Define line x length
         var xLength = mWdiff / innerCounter;
 
         //Get firtst Y transformed point
-        sample = samples[0];
+        var sample = samples[0];
         var startYLine = transformYValue(sample, hrMax, hrMin, height);
         
         //Initialize coordinates
@@ -137,7 +121,7 @@ class HRmonitor extends WatchUi.Drawable {
     hidden function drawCurrentHr(dc){
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
 
-        var currentHr = Activity.getActivityInfo().currentHeartRate;
+        var currentHr = $.mFaceValues.currentHr;
 
         if(currentHr == null){
             currentHr = "--";

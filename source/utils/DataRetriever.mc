@@ -1,5 +1,6 @@
 import Toybox.System;
 import Toybox.Activity;
+import Toybox.ActivityMonitor;
 import Toybox.Weather;
 import Toybox.Time;
 import Toybox.Position;
@@ -58,5 +59,36 @@ module DataRetriever {
             $.mFaceValues.lastLocation =  location.toDegrees();
             $.mFaceValues.updateSunEvents =  true;
         }
+    }
+
+    function getHeartRate(){
+        var currentMoment = Time.now().value();
+        if($.mFaceValues.lastHRMoment == null || currentMoment - $.mFaceValues.lastHRMoment > 5){
+            $.mFaceValues.lastHRMoment = currentMoment;
+            $.mFaceValues.currentHr = Activity.getActivityInfo().currentHeartRate;
+            var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
+            $.mFaceValues.hrMax = hrIterator.getMax();
+            $.mFaceValues.hrMin = hrIterator.getMin();
+            var samples = {};
+            var counter = 0;
+            var innerCounter = 0;
+            var sample = hrIterator.next();
+            while (sample != null){
+                if(counter % 5 == 0){
+                    if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
+                            samples[innerCounter] = sample.heartRate;
+                    }else{
+                        samples[innerCounter] = null;
+                    }    
+                    innerCounter++;
+                }   
+                sample = hrIterator.next();  
+                counter++;              
+            }
+            $.mFaceValues.hrSamples = samples;
+            $.mFaceValues.hrSamplesCounter = innerCounter;
+            $.mFaceValues.lastHRMoment = Time.now().value();
+        }
+        $.mFaceValues.currentMoment = currentMoment;
     }
 }

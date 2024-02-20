@@ -20,6 +20,15 @@ module mFaceValues {
     var updateSunEvents = false;
     //location
     var lastLocation;
+    //time
+    var currentMoment;
+    //HR
+    var currentHr;
+    var hrMax;
+    var hrMin;
+    var hrSamples;
+    var hrSamplesCounter;
+    var lastHRMoment;
 }
 
 class GarminDevView extends WatchUi.WatchFace {
@@ -115,6 +124,7 @@ class GarminDevView extends WatchUi.WatchFace {
     DataRetriever.getBattery();  
     DataRetriever.getLocation();
     DataRetriever.getSunEvents();
+    DataRetriever.getHeartRate();
     View.onUpdate(dc);
   }
 
