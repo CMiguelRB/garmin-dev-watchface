@@ -66,5 +66,3 @@ module Settings {
     }
   }
 }
-
-var DataFieldRez as Array<Symbol> = [];

@@ -4,7 +4,7 @@ import Toybox.Lang;
 import Toybox.ActivityMonitor;
 
 
-class DailyKms extends WatchUi.Drawable {
+class DailyDistance extends WatchUi.Drawable {
 
     var mRadius;
     var mStartDegree;
@@ -15,8 +15,8 @@ class DailyKms extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var activities = ActivityMonitor.getHistory();
-        var distance = ActivityMonitor.getInfo().distance;
+        var activities = $.DataValues.activities;
+        var distance = $.DataValues.distance;
         drawBars(dc, activities, distance);
         drawInfo(dc, distance);
     }

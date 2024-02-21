@@ -11,18 +11,7 @@ class Altitude extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var altitude = SensorHistory.getElevationHistory({:period => 1}).next();
-        if(altitude == null){
-            var iterator = SensorHistory.getElevationHistory({:period => 100, :order => SensorHistory.ORDER_NEWEST_FIRST});
-            altitude = iterator.next();
-            if(altitude == null){
-                while(altitude == null){
-                    altitude = iterator.next();
-                }
-            }
-        }
-        altitude = altitude.data;
-        altitude = Math.round(altitude).toNumber();
+        var altitude = $.DataValues.altitude;
         drawInfo(dc, altitude);
     }
 

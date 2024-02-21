@@ -21,7 +21,7 @@
   <drawable id="BodyBattery" class="BodyBattery">
   </drawable> 
 
-  <drawable id="DailyKms" class="DailyKms">
+  <drawable id="DailyDistance" class="DailyDistance">
   </drawable>
 
   <drawable id="FancyLines" class="FancyLines">

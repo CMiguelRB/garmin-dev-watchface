@@ -15,42 +15,42 @@ class FancyLines extends WatchUi.Drawable {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
 
         var y1End = 135;
-        var endX1 = getX(dc, -50, $.mFaceValues.width/1.9, 105);
+        var endX1 = getX(dc, -50, $.DataValues.width/1.9, 105);
         var endY1 = getY(dc, -50, y1End + 1, 105);
         var endX2 = getX(dc, -50, endX1, 15);
         var endY2 = getY(dc, -50,  endY1, 15);
         var arrow = [
             [45, y1End],            
-            [$.mFaceValues.width / 7, y1End + 1],
-            [$.mFaceValues.width / 1.9, y1End + 1],
+            [$.DataValues.width / 7, y1End + 1],
+            [$.DataValues.width / 1.9, y1End + 1],
 
             [endX1, endY1 + 1],
             [endX2, endY2],
             [endX1, endY1 - 1],
             
-            [$.mFaceValues.width / 1.9, y1End - 1],
-            [$.mFaceValues.width / 7, y1End - 1]
+            [$.DataValues.width / 1.9, y1End - 1],
+            [$.DataValues.width / 7, y1End - 1]
             //End
         ];
 
         dc.fillPolygon(arrow);
 
         var y2End = 255;
-        var endX3 = getX(dc, -230, $.mFaceValues.width - $.mFaceValues.width / 1.65, 105);
+        var endX3 = getX(dc, -230, $.DataValues.width - $.DataValues.width / 1.65, 105);
         var endY3 = getY(dc, -230, y2End + 1, 105);
         var endX4 = getX(dc, -230, endX3, 15);
         var endY4 = getY(dc, -230,  endY3, 15);
         var arrow2 = [
-            [$.mFaceValues.width - 25, y2End],            
-            [$.mFaceValues.width - 40, y2End + 1],
-            [$.mFaceValues.width - $.mFaceValues.width / 1.65, y2End + 1],
+            [$.DataValues.width - 25, y2End],            
+            [$.DataValues.width - 40, y2End + 1],
+            [$.DataValues.width - $.DataValues.width / 1.65, y2End + 1],
 
             [endX3, endY3 + 1],
             [endX4, endY4],
             [endX3, endY3 - 1],
             
-            [$.mFaceValues.width - $.mFaceValues.width / 1.65, y2End - 1],
-            [$.mFaceValues.width - 40, y2End - 1]
+            [$.DataValues.width - $.DataValues.width / 1.65, y2End - 1],
+            [$.DataValues.width - 40, y2End - 1]
             //End
         ];
 

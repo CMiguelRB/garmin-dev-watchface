@@ -15,8 +15,8 @@ class SunEvents extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var sunrise = $.mFaceValues.sunrise;
-        var sunset = $.mFaceValues.sunset;
+        var sunrise = $.DataValues.sunrise;
+        var sunset = $.DataValues.sunset;
         drawInfo(dc, sunrise, sunset);
     }
 

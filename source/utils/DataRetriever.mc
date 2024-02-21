@@ -5,24 +5,43 @@ import Toybox.Weather;
 import Toybox.Time;
 import Toybox.Position;
 import Toybox.Application;
+import Toybox.SensorHistory;
+import Toybox.Math;
 
 module DataRetriever {
 
-    function getBattery(){
-        $.mFaceValues.batteryInDays = System.getSystemStats().batteryInDays;
-        $.mFaceValues.batteryInPercentage = System.getSystemStats().battery;
+    function retrieveData(){
+        var currentMoment = Time.now().value();
+        if($.DataValues.lastRetrievalMoment == null || currentMoment - $.DataValues.lastRetrievalMoment > 5){
+
+            getBattery();  
+            getLocation();
+            getSunEvents();
+            getHeartRate();
+
+            getSteps();
+            getBodyBattery();
+            getActivityGoal();
+            getAltitude();
+            getDistance();
+
+            $.DataValues.lastRetrievalMoment = Time.now().value();
+        }
     }
 
-    
+    function getBattery(){
+        $.DataValues.batteryInDays = System.getSystemStats().batteryInDays;
+        $.DataValues.batteryInPercentage = System.getSystemStats().battery;
+    }    
 
     function getSunEvents(){
         var now = Time.now();
         if(
-            ($.mFaceValues.lastSunEventsRetrieval == null
+            ($.DataValues.lastSunEventsRetrieval == null
              || Time.Gregorian.info(now, Time.FORMAT_MEDIUM).day
-             != Time.Gregorian.info($.mFaceValues.lastSunEventsRetrieval, Time.FORMAT_MEDIUM).day)
-            || $.mFaceValues.updateSunEvents == true){
-            var lastLocation = $.mFaceValues.lastLocation;
+             != Time.Gregorian.info($.DataValues.lastSunEventsRetrieval, Time.FORMAT_MEDIUM).day)
+            || $.DataValues.updateSunEvents == true){
+            var lastLocation = $.DataValues.lastLocation;
             if(lastLocation != null){
                 var sunset = null;
                 var sunrise = null;
@@ -37,10 +56,10 @@ module DataRetriever {
                     sunset = Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunset, Time.FORMAT_MEDIUM).min.format("%02d");
                     sunrise = Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunrise, Time.FORMAT_MEDIUM).min.format("%02d");
                         
-                    $.mFaceValues.sunrise = sunrise;
-                    $.mFaceValues.sunset = sunset;
-                    $.mFaceValues.lastSunEventsRetrieval = now;
-                    $.mFaceValues.updateSunEvents = false;
+                    $.DataValues.sunrise = sunrise;
+                    $.DataValues.sunset = sunset;
+                    $.DataValues.lastSunEventsRetrieval = now;
+                    $.DataValues.updateSunEvents = false;
                 }        
             }        
         }
@@ -48,47 +67,84 @@ module DataRetriever {
 
     function getLocation(){
         var location = Weather.getCurrentConditions().observationLocationPosition;
-        var lastLocation = $.mFaceValues.lastLocation;
+        var lastLocation = $.DataValues.lastLocation;
         if(location != null && lastLocation != null){
             location = location.toDegrees();
             if(location[0] != lastLocation[0] || location[1] != lastLocation[1]){
-                $.mFaceValues.lastLocation =  location;
-                $.mFaceValues.updateSunEvents =  true;
+                $.DataValues.lastLocation =  location;
+                $.DataValues.updateSunEvents =  true;
             }            
         }else{
-            $.mFaceValues.lastLocation =  location.toDegrees();
-            $.mFaceValues.updateSunEvents =  true;
+            $.DataValues.lastLocation =  location.toDegrees();
+            $.DataValues.updateSunEvents =  true;
         }
     }
 
     function getHeartRate(){
-        var currentMoment = Time.now().value();
-        if($.mFaceValues.lastHRMoment == null || currentMoment - $.mFaceValues.lastHRMoment > 5){
-            $.mFaceValues.lastHRMoment = currentMoment;
-            $.mFaceValues.currentHr = Activity.getActivityInfo().currentHeartRate;
-            var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
-            $.mFaceValues.hrMax = hrIterator.getMax();
-            $.mFaceValues.hrMin = hrIterator.getMin();
-            var samples = {};
-            var counter = 0;
-            var innerCounter = 0;
-            var sample = hrIterator.next();
-            while (sample != null){
-                if(counter % 5 == 0){
-                    if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-                            samples[innerCounter] = sample.heartRate;
-                    }else{
-                        samples[innerCounter] = null;
-                    }    
-                    innerCounter++;
-                }   
-                sample = hrIterator.next();  
-                counter++;              
-            }
-            $.mFaceValues.hrSamples = samples;
-            $.mFaceValues.hrSamplesCounter = innerCounter;
-            $.mFaceValues.lastHRMoment = Time.now().value();
+        $.DataValues.currentHr = Activity.getActivityInfo().currentHeartRate;
+        var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
+        $.DataValues.hrMax = hrIterator.getMax();
+        $.DataValues.hrMin = hrIterator.getMin();
+        var samples = {};
+        var counter = 0;
+        var innerCounter = 0;
+        var sample = hrIterator.next();
+        while (sample != null){
+            if(counter % 5 == 0){
+                if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
+                        samples[innerCounter] = sample.heartRate;
+                }else{
+                    samples[innerCounter] = null;
+                }    
+                innerCounter++;
+            }   
+            sample = hrIterator.next();  
+            counter++;              
         }
-        $.mFaceValues.currentMoment = currentMoment;
+        $.DataValues.hrSamples = samples;
+        $.DataValues.hrSamplesCounter = innerCounter;
+    }
+
+    function getSteps(){
+        $.DataValues.steps = ActivityMonitor.getInfo().steps;
+        $.DataValues.stepsGoal = ActivityMonitor.getInfo().stepGoal;
+    }
+
+    function getBodyBattery(){
+        var bodyBattery = SensorHistory.getBodyBatteryHistory({:period => 1, :order => SensorHistory.ORDER_NEWEST_FIRST}).next();
+        if(bodyBattery == null){
+            var iterator = SensorHistory.getBodyBatteryHistory({:period => 100, :order => SensorHistory.ORDER_NEWEST_FIRST});
+            bodyBattery = iterator.next();
+            if(bodyBattery == null){
+                while(bodyBattery == null){
+                    bodyBattery = iterator.next();
+                }
+            }
+        }
+        $.DataValues.bodyBattery = bodyBattery.data;
+    }
+
+    function getActivityGoal(){
+        $.DataValues.activity = ActivityMonitor.getInfo().activeMinutesWeek;
+        $.DataValues.activityGoal = ActivityMonitor.getInfo().activeMinutesWeekGoal;
+    }
+
+    function getAltitude(){
+        var altitude = SensorHistory.getElevationHistory({:period => 1}).next();
+        if(altitude == null){
+            var iterator = SensorHistory.getElevationHistory({:period => 100, :order => SensorHistory.ORDER_NEWEST_FIRST});
+            altitude = iterator.next();
+            if(altitude == null){
+                while(altitude == null){
+                    altitude = iterator.next();
+                }
+            }
+        }
+        $.DataValues.altitude = Math.round(altitude.data).toNumber();
+    }
+
+    function getDistance(){
+        $.DataValues.activities = ActivityMonitor.getHistory();
+        $.DataValues.distance = ActivityMonitor.getInfo().distance;
     }
 }

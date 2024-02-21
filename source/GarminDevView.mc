@@ -3,34 +3,6 @@ import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.System;
 
-module mFaceValues {
-    var height;
-    var centerX;
-    var width;
-    var centerY;
-    //BatteryArc
-    var batteryArcRadius;
-    var batteryArcGapDegree;
-    var batteryInPercentage;
-    var batteryInDays;
-    //SunEvents
-    var sunrise;
-    var sunset;
-    var lastSunEventsRetrieval;
-    var updateSunEvents = false;
-    //location
-    var lastLocation;
-    //time
-    var currentMoment;
-    //HR
-    var currentHr;
-    var hrMax;
-    var hrMin;
-    var hrSamples;
-    var hrSamplesCounter;
-    var lastHRMoment;
-}
-
 class GarminDevView extends WatchUi.WatchFace {
 
   var mBurnInProtectionMode = false;
@@ -95,13 +67,13 @@ class GarminDevView extends WatchUi.WatchFace {
   // Load your resources here
   function onLayout(dc) {
     //General values
-    mFaceValues.height = dc.getHeight();
-    mFaceValues.centerY = dc.getHeight()/2;
-    mFaceValues.width = dc.getWidth();
-    mFaceValues.centerX = dc.getWidth()/2;
+    DataValues.height = dc.getHeight();
+    DataValues.centerY = dc.getHeight()/2;
+    DataValues.width = dc.getWidth();
+    DataValues.centerX = dc.getWidth()/2;
     //BodyBattery
-    mFaceValues.batteryArcRadius = mFaceValues.centerX - 6;
-    mFaceValues.batteryArcGapDegree = 16;
+    DataValues.batteryArcRadius = DataValues.centerX - 6;
+    DataValues.batteryArcGapDegree = 16;
     setLayout(chooseLayout(dc, true));
   }
 
@@ -121,10 +93,7 @@ class GarminDevView extends WatchUi.WatchFace {
     if(dc has :setAntiAlias) {
         dc.setAntiAlias(true);
     }
-    DataRetriever.getBattery();  
-    DataRetriever.getLocation();
-    DataRetriever.getSunEvents();
-    DataRetriever.getHeartRate();
+    DataRetriever.retrieveData();
     View.onUpdate(dc);
   }
 

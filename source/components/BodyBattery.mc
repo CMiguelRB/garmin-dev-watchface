@@ -11,17 +11,8 @@ class BodyBattery extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var bodyBattery = SensorHistory.getBodyBatteryHistory({:period => 1, :order => SensorHistory.ORDER_NEWEST_FIRST}).next();
-        if(bodyBattery == null){
-            var iterator = SensorHistory.getBodyBatteryHistory({:period => 100, :order => SensorHistory.ORDER_NEWEST_FIRST});
-            bodyBattery = iterator.next();
-            if(bodyBattery == null){
-                while(bodyBattery == null){
-                    bodyBattery = iterator.next();
-                }
-            }
-        }
-        bodyBattery = bodyBattery.data;
+        
+        var bodyBattery = $.DataValues.bodyBattery;
         drawInfo(dc, bodyBattery);
         drawBars(dc, bodyBattery);
     }

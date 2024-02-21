@@ -11,8 +11,8 @@ class StepsGoal extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var steps = ActivityMonitor.getInfo().steps;
-        var stepsGoal = ActivityMonitor.getInfo().stepGoal;
+        var steps = $.DataValues.steps;
+        var stepsGoal = $.DataValues.stepsGoal;
         drawArcs(dc, steps, stepsGoal);
         drawInfo(dc, steps, stepsGoal);
     }
