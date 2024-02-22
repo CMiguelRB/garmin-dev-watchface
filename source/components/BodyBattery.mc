@@ -19,18 +19,18 @@ class BodyBattery extends WatchUi.Drawable {
 
     hidden function drawInfo(dc, bodyBattery){
         if(bodyBattery == null){
-            dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
         }else if(bodyBattery == 100){
-            dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
         }else{
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
 
         dc.drawText(160, 305, Settings.resource(Rez.Fonts.Icons), "n", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, bodyBattery){
-        dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
 
         dc.setPenWidth(8);
 
@@ -51,7 +51,7 @@ class BodyBattery extends WatchUi.Drawable {
             return;
         }
 
-        dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         var translatedPercentage = (bodyBattery/100).toFloat();
 

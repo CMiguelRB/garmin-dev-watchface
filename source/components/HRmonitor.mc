@@ -36,15 +36,15 @@ class HRmonitor extends WatchUi.Drawable {
         var polyPoints = points[1] as Array<Array>;
         var linePoints = points[0] as Array<Number>;
 
-        dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
-        dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         dc.fillPolygon(polyPoints);
 
         dc.setPenWidth(3);
 
-        dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
 
         for(var i = 0; i<linePoints.size();i++){
             if(linePoints[i] == null){
@@ -119,7 +119,7 @@ class HRmonitor extends WatchUi.Drawable {
     }
 
     hidden function drawCurrentHr(dc){
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
         var currentHr = $.DataValues.currentHr;
 

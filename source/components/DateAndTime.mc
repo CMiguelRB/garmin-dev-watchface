@@ -60,12 +60,12 @@ class DateAndTime extends WatchUi.Drawable {
 
     var time = [hours.substring(0,1), hours.substring(1,2), ".", minutes.substring(0,1), minutes.substring(1,2)];
 
-    dc.setColor((mBurnInProtectionMode ? Graphics.COLOR_WHITE : themeColor(Color.FOREGROUND)), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
     // Date
     dc.drawText(dateX, dateY, Settings.resource(Rez.Fonts.Date), date, Graphics.TEXT_JUSTIFY_CENTER);
 
-    dc.setColor((mBurnInProtectionMode ? Graphics.COLOR_WHITE : themeColor(Color.FOREGROUND)), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
     //Time
     var lastPosition = hoursX - 70;
@@ -106,7 +106,7 @@ class DateAndTime extends WatchUi.Drawable {
     }
     //Alarms
     if(System.getDeviceSettings().alarmCount > 0){
-      dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
       dc.drawText(lastPosition+45, dc.getHeight() * 0.5-20, Settings.resource(Rez.Fonts.Icons), "k", Graphics.TEXT_JUSTIFY_CENTER);
     }    
     updateSeconds(dc, now.sec, lastPosition);    
@@ -114,7 +114,7 @@ class DateAndTime extends WatchUi.Drawable {
 
   function updateSeconds(dc, seconds, lastPosition) {
     var y = dc.getHeight() * 0.5 - 60;
-    dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
     
     seconds = seconds.format("%02d");    
 

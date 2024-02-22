@@ -17,7 +17,7 @@ class Altitude extends WatchUi.Drawable {
 
     hidden function drawInfo(dc, altitude){
         
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);        
+        dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);        
 
         //dc.drawText(90, 308, Settings.resource(Rez.Fonts.Icons), "i", Graphics.TEXT_JUSTIFY_CENTER);
 

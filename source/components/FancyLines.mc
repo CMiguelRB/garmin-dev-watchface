@@ -12,7 +12,7 @@ class FancyLines extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
         var y1End = 135;
         var endX1 = getX(dc, -50, $.DataValues.width/1.9, 105);
@@ -56,7 +56,7 @@ class FancyLines extends WatchUi.Drawable {
 
         dc.fillPolygon(arrow2);
 
-        dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
 
         var y3End = 88;
         var x3Start = 75;

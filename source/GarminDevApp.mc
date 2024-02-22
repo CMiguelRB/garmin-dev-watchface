@@ -46,7 +46,6 @@ class GarminDevApp extends Application.AppBase {
 
   // Return the initial view of your application here
   function getInitialView() {
-    Settings.initSettings();
     initBackground();
     return [ new GarminDevView() ];
   }

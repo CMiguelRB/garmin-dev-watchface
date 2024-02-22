@@ -1,5 +1,11 @@
 <strings>
   <string id="AppName">Garmin Dev</string>
+  <string id="primaryColorTitle">Color principal</string>
+  <string id="secondaryColorTitle">Color acento</string>
+  <string id="inactiveColorTitle">Color inactivo</string>
+  <string id="textColorTitle">Color texto</string>
+  <string id="backgroundColorTitle">Color fondo</string>
+  <string id="batteryInDaysTitle">Batería en días</string>
 
   <string id="DateMonth1">Ene</string>
   <string id="DateMonth2">Feb</string>

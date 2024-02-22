@@ -2,7 +2,7 @@ import Toybox.Graphics;
 import Toybox.Math;
 import Toybox.WatchUi;
 import Toybox.Lang;
-import Toybox.System;
+import Toybox.Application;
 
 class BatteryArc extends WatchUi.Drawable {
 
@@ -28,15 +28,11 @@ class BatteryArc extends WatchUi.Drawable {
     dc.setPenWidth(12);
     drawRemainingArc(dc);
     drawProgressArc(dc, remainingBattery);
-    drawIcon(dc, remainingBatteryInDays);
-  }
-
-  function update(dc) {
-    drawIcon(dc, remainingBatteryInDays);
+    drawIcon(dc, remainingBattery, remainingBatteryInDays);
   }
 
   hidden function drawProgressArc(dc, fillLevel) {
-    dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
     if (fillLevel > 0.0) {
       var startDegree = mStartDegree;
       var endDegree = mStartDegree - getFillDegree(fillLevel);
@@ -56,7 +52,7 @@ class BatteryArc extends WatchUi.Drawable {
   }
 
   hidden function drawRemainingArc(dc) {    
-    dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+    dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
 
     drawEndpoint(dc, mStartDegree, 0, 0);
     drawEndpoint(dc, mEndDegree, 0, 0);
@@ -79,13 +75,20 @@ class BatteryArc extends WatchUi.Drawable {
     dc.fillCircle(x+offX, y+offY, 5);
   }
 
-  hidden function drawIcon(dc, remainingBattery) {
+  hidden function drawIcon(dc, remainingBattery, remainingBatteryInDays) {
+    var batteryInDays = Properties.getValue("batteryInDays");
+
+    if(batteryInDays == true){
+      remainingBattery = remainingBatteryInDays;
+    }
+    
     remainingBattery = remainingBattery.toNumber().format("%i");
     if (remainingBattery == "0") {
-      dc.setColor(themeColor(Color.TEXT_INACTIVE), Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
     } else {
-      dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+      dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
     }
+
 
     var  x = $.DataValues.centerX;
     var  y = 15; 
@@ -95,7 +98,12 @@ class BatteryArc extends WatchUi.Drawable {
       remainingBattery = "0";
     }
 
-    remainingBattery = remainingBattery + "d";
+    if(batteryInDays == true){
+        remainingBattery = remainingBattery + "d";
+    }else{
+        remainingBattery = remainingBattery + "%";
+        x = $.DataValues.centerX - 10;
+    }
 
     dc.drawText(
         x-17,
@@ -115,8 +123,12 @@ class BatteryArc extends WatchUi.Drawable {
         Settings.resource(Rez.Fonts.Data),
         charArray[i],
         Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
-      );  
-      offset += 12; 
+      );
+      if(i == charArray.size()-2 && batteryInDays == false){
+        offset += 18; 
+      } else{
+        offset += 12; 
+      }
     } 
   }
 

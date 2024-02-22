@@ -23,7 +23,7 @@ class DailyDistance extends WatchUi.Drawable {
 
     hidden function drawInfo(dc, distance){
 
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
         dc.drawText(315, 170, Settings.resource(Rez.Fonts.Icons), "g", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
@@ -36,7 +36,7 @@ class DailyDistance extends WatchUi.Drawable {
 
         dc.setPenWidth(10);
 
-        dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         var x = 285;
         var base = 240;
@@ -65,7 +65,7 @@ class DailyDistance extends WatchUi.Drawable {
         for(var i = 0; i < activities.size(); i++){
             var d = activities[i].distance;
             if(i == activities.size()-1){
-                dc.setColor(themeColor(Color.SECONDARY_1), Graphics.COLOR_TRANSPARENT);
+                dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
             }
             if(d != null){
                 var y = getY(d, dMax, dMin, hDiff, base);

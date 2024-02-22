@@ -30,7 +30,7 @@ class SunEvents extends WatchUi.Drawable {
             sunset = "00:00";
         }
         
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);        
+        dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);        
 
         dc.drawText(151, 30, Settings.resource(Rez.Fonts.Icons), "l", Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(150, 45, Settings.resource(Rez.Fonts.Data), sunrise, Graphics.TEXT_JUSTIFY_CENTER);

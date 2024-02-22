@@ -1,3 +1,20 @@
 <settings>
-
+    <setting propertyKey="@Properties.primaryColor" title="@Strings.primaryColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+    <setting propertyKey="@Properties.secondaryColor" title="@Strings.secondaryColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+    <setting propertyKey="@Properties.inactiveColor" title="@Strings.inactiveColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+    <setting propertyKey="@Properties.textColor" title="@Strings.textColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+    <setting propertyKey="@Properties.backgroundColor" title="@Strings.backgroundColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
+    <setting propertyKey="@Properties.batteryInDays" title="@Strings.batteryInDaysTitle">
+        <settingConfig type="boolean"/>
+    </setting>
 </settings>

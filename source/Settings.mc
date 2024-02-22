@@ -26,32 +26,6 @@ module Settings {
     return _resources[resourceId];
   }
 
-  function initSettings() {
-    var width = System.getDeviceSettings().screenWidth;
-    var height = System.getDeviceSettings().screenHeight;
-    
-    _settings["width"] = width;
-    _settings["height"] = height;
-  
-    determineSleepTime();
-  }
-
-  function setAsBoolean(settingsId, defaultValue as Lang.Boolean) {
-    var value = Properties.getValue(settingsId);
-    if (value == null || !(value instanceof Lang.Boolean)) {
-      value = defaultValue;
-    }
-    _settings[settingsId] = value;
-  }
-
-  function setAsNumber(settingsId, defaultValue as Lang.Number) {
-    var value = Properties.getValue(settingsId);
-    if (value == null || !(value instanceof Lang.Number)) {
-      value = defaultValue;
-    }
-    _settings[settingsId] = value;
-  }
-
   function determineSleepTime() {
     var profile = UserProfile.getProfile();
     var current = Gregorian.info(Time.now(), Time.FORMAT_SHORT);

@@ -26,11 +26,11 @@ class ActivityGoal extends WatchUi.Drawable {
 
     hidden function drawInfo(dc, activity, activityGoal){
         if(activity == null || activityGoal == null){
-            dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
         }else if(activity.total > activityGoal){
-            dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
         }else{
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
 
 
@@ -38,7 +38,7 @@ class ActivityGoal extends WatchUi.Drawable {
     }
 
     hidden function drawBars(dc, activity, activityGoal){
-        dc.setColor(themeColor(Color.INACTIVE), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
 
         dc.setPenWidth(8);
 
@@ -61,7 +61,7 @@ class ActivityGoal extends WatchUi.Drawable {
            return;
        }
 
-        dc.setColor(themeColor(Color.PRIMARY), Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         var goalPercentage = (100 * activity.total / activityGoal).toFloat();
 
