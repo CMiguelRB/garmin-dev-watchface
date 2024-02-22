@@ -19,7 +19,7 @@ class Altitude extends WatchUi.Drawable {
         
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);        
 
-        //dc.drawText(90, 308, Settings.resource(Rez.Fonts.Icons), "i", Graphics.TEXT_JUSTIFY_CENTER);
+        //dc.drawText(90, 308, $.fonts.icons, "i", Graphics.TEXT_JUSTIFY_CENTER);
 
         //dc.drawAngledText(105, 316, Graphics.getVectorFont({:face => ["RobotoCondensedRegular"] as Array<String>,:size => 32}), altitude+" m", Graphics.TEXT_JUSTIFY_LEFT, 50);
         dc.drawAngledText(90, 335, Graphics.getVectorFont({:face => ["RobotoCondensedRegular"] as Array<String>,:size => 38}), altitude+" m.", Graphics.TEXT_JUSTIFY_LEFT, 50);

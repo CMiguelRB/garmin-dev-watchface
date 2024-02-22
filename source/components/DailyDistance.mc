@@ -25,11 +25,11 @@ class DailyDistance extends WatchUi.Drawable {
 
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
-        dc.drawText(315, 170, Settings.resource(Rez.Fonts.Icons), "g", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(315, 170, $.fonts.icons, "g", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         var distanceKm = (distance.toFloat() / 100000).format("%.1f");
 
-        dc.drawText(345, 173, Settings.resource(Rez.Fonts.Data), distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(345, 173, $.fonts.data, distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, activities, distance){

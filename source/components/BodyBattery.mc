@@ -26,7 +26,7 @@ class BodyBattery extends WatchUi.Drawable {
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
 
-        dc.drawText(160, 305, Settings.resource(Rez.Fonts.Icons), "n", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(160, 305, $.fonts.icons, "n", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, bodyBattery){

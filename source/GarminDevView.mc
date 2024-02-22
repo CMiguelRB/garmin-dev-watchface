@@ -3,6 +3,13 @@ import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.System;
 
+module fonts {
+  var icons;
+  var data;
+  var time;
+  var date;
+}
+
 class GarminDevView extends WatchUi.WatchFace {
 
   var mBurnInProtectionMode = false;
@@ -71,9 +78,14 @@ class GarminDevView extends WatchUi.WatchFace {
     DataValues.centerY = dc.getHeight()/2;
     DataValues.width = dc.getWidth();
     DataValues.centerX = dc.getWidth()/2;
-    //BodyBattery
+    //Battery
     DataValues.batteryArcRadius = DataValues.centerX - 6;
     DataValues.batteryArcGapDegree = 16;
+    //Fonts
+    $.fonts.icons = Settings.resource(Rez.Fonts.Icons);
+    $.fonts.time = Settings.resource(Rez.Fonts.Time);
+    $.fonts.data = Settings.resource(Rez.Fonts.Data);
+    $.fonts.date = Settings.resource(Rez.Fonts.Date);
     setLayout(chooseLayout(dc, true));
   }
 

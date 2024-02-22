@@ -34,7 +34,7 @@ class ActivityGoal extends WatchUi.Drawable {
         }
 
 
-        dc.drawText(175, 276, Settings.resource(Rez.Fonts.Icons), "p", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(175, 276, $.fonts.icons, "p", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawBars(dc, activity, activityGoal){

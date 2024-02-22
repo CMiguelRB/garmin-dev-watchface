@@ -55,7 +55,7 @@ class DateAndTime extends WatchUi.Drawable {
     var hoursX = 120;
     var hoursY = dc.getHeight() * 0.50 - 90;
 
-    var separatorDim = dc.getTextDimensions(":", Settings.resource(Rez.Fonts.Time));
+    var separatorDim = dc.getTextDimensions(":", $.fonts.time);
     var separatorY = dc.getHeight() * 0.50 - separatorDim[1] / 2.0 - 5;
 
     var time = [hours.substring(0,1), hours.substring(1,2), ".", minutes.substring(0,1), minutes.substring(1,2)];
@@ -63,14 +63,14 @@ class DateAndTime extends WatchUi.Drawable {
     dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
     // Date
-    dc.drawText(dateX, dateY, Settings.resource(Rez.Fonts.Date), date, Graphics.TEXT_JUSTIFY_CENTER);
+    dc.drawText(dateX, dateY, $.fonts.date, date, Graphics.TEXT_JUSTIFY_CENTER);
 
     dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
     //Time
     var lastPosition = hoursX - 70;
 
-    dc.drawText(lastPosition, hoursY, Settings.resource(Rez.Fonts.Time), time[0], Graphics.TEXT_JUSTIFY_CENTER);
+    dc.drawText(lastPosition, hoursY, $.fonts.time, time[0], Graphics.TEXT_JUSTIFY_CENTER);
 
     for(var i = 1; i<time.size();i++){
         if(time[i-1].equals("1")){
@@ -84,8 +84,8 @@ class DateAndTime extends WatchUi.Drawable {
           }else{
             lastPosition -= 15;
           }
-          dc.drawText(lastPosition, separatorY - 12, Settings.resource(Rez.Fonts.Time), time[i], Graphics.TEXT_JUSTIFY_CENTER);
-          dc.drawText(lastPosition, separatorY - 42, Settings.resource(Rez.Fonts.Time), time[i], Graphics.TEXT_JUSTIFY_CENTER);
+          dc.drawText(lastPosition, separatorY - 12, $.fonts.time, time[i], Graphics.TEXT_JUSTIFY_CENTER);
+          dc.drawText(lastPosition, separatorY - 42, $.fonts.time, time[i], Graphics.TEXT_JUSTIFY_CENTER);
           if(time[i+1].equals("1")){
             lastPosition -= 25;
           }else{
@@ -96,18 +96,18 @@ class DateAndTime extends WatchUi.Drawable {
         if(i == 4 && time[i].equals("1") && !time[i-1].equals("1")){
           lastPosition -= 10;
         }
-        dc.drawText(lastPosition, hoursY, Settings.resource(Rez.Fonts.Time), time[i], Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(lastPosition, hoursY, $.fonts.time, time[i], Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     if (is12Hour) {
       var meridiem = (now.hour < 12) ? "AM" : "PM";
       var y = dc.getHeight() * 0.50 - 10;
-      dc.drawText(lastPosition + 25, y, Settings.resource(Rez.Fonts.Date), meridiem, Graphics.TEXT_JUSTIFY_LEFT);
+      dc.drawText(lastPosition + 25, y, $.fonts.date, meridiem, Graphics.TEXT_JUSTIFY_LEFT);
     }
     //Alarms
     if(System.getDeviceSettings().alarmCount > 0){
       dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
-      dc.drawText(lastPosition+45, dc.getHeight() * 0.5-20, Settings.resource(Rez.Fonts.Icons), "k", Graphics.TEXT_JUSTIFY_CENTER);
+      dc.drawText(lastPosition+45, dc.getHeight() * 0.5-20, $.fonts.icons, "k", Graphics.TEXT_JUSTIFY_CENTER);
     }    
     updateSeconds(dc, now.sec, lastPosition);    
   }
@@ -121,8 +121,8 @@ class DateAndTime extends WatchUi.Drawable {
     var first = seconds.substring(0,1);
     var second = seconds.substring(1,2);
     
-    dc.drawText(lastPosition + 33, y, Settings.resource(Rez.Fonts.Date), first, Graphics.TEXT_JUSTIFY_CENTER);
-    dc.drawText(lastPosition + 48, y, Settings.resource(Rez.Fonts.Date), second, Graphics.TEXT_JUSTIFY_CENTER);
+    dc.drawText(lastPosition + 33, y, $.fonts.date, first, Graphics.TEXT_JUSTIFY_CENTER);
+    dc.drawText(lastPosition + 48, y, $.fonts.date, second, Graphics.TEXT_JUSTIFY_CENTER);
   }
 
   hidden function getDateLine(now as Gregorian.Info) {    

@@ -108,7 +108,7 @@ class BatteryArc extends WatchUi.Drawable {
     dc.drawText(
         x-17,
         y-2,
-        Settings.resource(Rez.Fonts.Icons),
+        $.fonts.icons,
         "h",
         Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
       );  
@@ -120,7 +120,7 @@ class BatteryArc extends WatchUi.Drawable {
       dc.drawText(
         x + offset,
         y,
-        Settings.resource(Rez.Fonts.Data),
+        $.fonts.data,
         charArray[i],
         Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
       );

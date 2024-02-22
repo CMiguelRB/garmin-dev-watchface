@@ -24,9 +24,9 @@ class StepsGoal extends WatchUi.Drawable {
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
 
-        dc.drawText(255, 128, Settings.resource(Rez.Fonts.Icons), "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(255, 128, $.fonts.icons, "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.drawText(305, 123, Settings.resource(Rez.Fonts.Data), steps, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(305, 123, $.fonts.data, steps, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawArcs(dc, steps, stepsGoal){
