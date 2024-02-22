@@ -1,4 +1,4 @@
-# garmin-dev-face
+# garmin-retrospecter-watchface
 Garmin EPIX 2 watch face
 
 
