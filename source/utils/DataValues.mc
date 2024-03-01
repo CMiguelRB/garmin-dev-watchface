@@ -12,6 +12,9 @@ module DataValues {
     //SunEvents
     var sunrise;
     var sunset;
+    var sunriseMoment;
+    var sunsetMoment;
+    var dayPercentage;
     var lastSunEventsRetrieval;
     var updateSunEvents = false;
     //location
@@ -37,4 +40,7 @@ module DataValues {
     //Distance
     var activities;
     var distance;
+    //Temps
+    var lowTemp;
+    var highTemp;
 }

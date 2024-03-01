@@ -11,17 +11,13 @@ class Altitude extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var altitude = $.DataValues.altitude;
+        var altitude = DataValues.altitude;
         drawInfo(dc, altitude);
     }
 
     hidden function drawInfo(dc, altitude){
         
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);        
-
-        //dc.drawText(90, 308, $.fonts.icons, "i", Graphics.TEXT_JUSTIFY_CENTER);
-
-        //dc.drawAngledText(105, 316, Graphics.getVectorFont({:face => ["RobotoCondensedRegular"] as Array<String>,:size => 32}), altitude+" m", Graphics.TEXT_JUSTIFY_LEFT, 50);
-        dc.drawAngledText(90, 335, Graphics.getVectorFont({:face => ["RobotoCondensedRegular"] as Array<String>,:size => 38}), altitude+" m.", Graphics.TEXT_JUSTIFY_LEFT, 50);
+        dc.drawText(135, 238, $.fonts.date, altitude+" m", Graphics.TEXT_JUSTIFY_RIGHT);
     }
 }

@@ -18,8 +18,8 @@ class ActivityGoal extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var activity = $.DataValues.activity;
-        var activityGoal = $.DataValues.activityGoal;
+        var activity = DataValues.activity;
+        var activityGoal = DataValues.activityGoal;
         drawInfo(dc, activity, activityGoal);
         drawBars(dc, activity, activityGoal);
     }

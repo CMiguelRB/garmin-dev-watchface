@@ -10,6 +10,7 @@ module Color {
           "secondary" => Properties.getValue("secondaryColor"),
           "inactive" => Properties.getValue("inactiveColor"),
           "text" => Properties.getValue("textColor"),
+          "lines" => Properties.getValue("linesColor"),
           "background" => Properties.getValue("backgroundColor")
       };
 

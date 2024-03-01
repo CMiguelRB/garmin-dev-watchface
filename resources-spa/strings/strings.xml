@@ -5,6 +5,7 @@
   <string id="inactiveColorTitle">Color inactivo</string>
   <string id="textColorTitle">Color texto</string>
   <string id="backgroundColorTitle">Color fondo</string>
+  <string id="linesColorTitle">Color líneas</string>
   <string id="batteryInDaysTitle">Batería en días</string>
 
   <string id="DateMonth1">Ene</string>

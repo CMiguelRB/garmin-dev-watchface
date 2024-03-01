@@ -11,6 +11,9 @@
     <setting propertyKey="@Properties.textColor" title="@Strings.textColorTitle">
         <settingConfig type="alphaNumeric"/>
     </setting>
+    <setting propertyKey="@Properties.linesColor" title="@Strings.linesColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
     <setting propertyKey="@Properties.backgroundColor" title="@Strings.backgroundColorTitle">
         <settingConfig type="alphaNumeric"/>
     </setting>

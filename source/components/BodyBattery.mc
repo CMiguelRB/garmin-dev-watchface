@@ -12,7 +12,7 @@ class BodyBattery extends WatchUi.Drawable {
 
     function draw(dc){
         
-        var bodyBattery = $.DataValues.bodyBattery;
+        var bodyBattery = DataValues.bodyBattery;
         drawInfo(dc, bodyBattery);
         drawBars(dc, bodyBattery);
     }

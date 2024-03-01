@@ -18,3 +18,5 @@ char id=109 x=28   y=27     width=23    height=21    xoffset=0     yoffset=0    
 char id=110 x=54   y=27     width=25    height=21    xoffset=0     yoffset=0     xadvance=25    page=0  chnl=15
 char id=111 x=81   y=27     width=28    height=21    xoffset=0     yoffset=0     xadvance=28    page=0  chnl=15
 char id=112 x=110   y=27     width=19    height=21    xoffset=0     yoffset=0     xadvance=19    page=0  chnl=15
+char id=113 x=132   y=27     width=22    height=21    xoffset=0     yoffset=0     xadvance=22    page=0  chnl=15
+char id=114 x=157   y=27     width=10    height=21    xoffset=0     yoffset=0     xadvance=10    page=0  chnl=15

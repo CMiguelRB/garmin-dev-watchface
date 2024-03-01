@@ -6,6 +6,7 @@
   <string id="textColorTitle">Text color</string>
   <string id="backgroundColorTitle">Bacground color</string>
   <string id="batteryInDaysTitle">Battery in days</string>
+  <string id="linesColorTitle">Lines color</string>
 
   <string id="DateMonth1">Jan</string>
   <string id="DateMonth2">Feb</string>

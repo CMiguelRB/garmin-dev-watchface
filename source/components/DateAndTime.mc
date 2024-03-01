@@ -49,21 +49,13 @@ class DateAndTime extends WatchUi.Drawable {
     var hours = getHours(now, is12Hour);
     var minutes = now.min.format("%02d");
 
-    var dateX = 130;
-    var dateY = dc.getHeight() * .20;
 
     var hoursX = 120;
-    var hoursY = dc.getHeight() * 0.50 - 90;
+    var hoursY = DataValues.centerY - 89;
 
-    var separatorDim = dc.getTextDimensions(":", $.fonts.time);
-    var separatorY = dc.getHeight() * 0.50 - separatorDim[1] / 2.0 - 5;
+    var separatorY = DataValues.centerY - 95;
 
     var time = [hours.substring(0,1), hours.substring(1,2), ".", minutes.substring(0,1), minutes.substring(1,2)];
-
-    dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
-
-    // Date
-    dc.drawText(dateX, dateY, $.fonts.date, date, Graphics.TEXT_JUSTIFY_CENTER);
 
     dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
@@ -99,21 +91,26 @@ class DateAndTime extends WatchUi.Drawable {
         dc.drawText(lastPosition, hoursY, $.fonts.time, time[i], Graphics.TEXT_JUSTIFY_CENTER);
     }
 
+      // Date
+      var dateX = lastPosition + 18;
+      var dateY = 112;
+      dc.drawText(dateX, dateY, $.fonts.date, date, Graphics.TEXT_JUSTIFY_RIGHT);
+
     if (is12Hour) {
       var meridiem = (now.hour < 12) ? "AM" : "PM";
-      var y = dc.getHeight() * 0.50 - 10;
+      var y = DataValues.centerY - 10;
       dc.drawText(lastPosition + 25, y, $.fonts.date, meridiem, Graphics.TEXT_JUSTIFY_LEFT);
     }
     //Alarms
     if(System.getDeviceSettings().alarmCount > 0){
       dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
-      dc.drawText(lastPosition+45, dc.getHeight() * 0.5-20, $.fonts.icons, "k", Graphics.TEXT_JUSTIFY_CENTER);
+      dc.drawText(lastPosition+45, DataValues.centerY - 20, $.fonts.icons, "k", Graphics.TEXT_JUSTIFY_CENTER);
     }    
     updateSeconds(dc, now.sec, lastPosition);    
   }
 
   function updateSeconds(dc, seconds, lastPosition) {
-    var y = dc.getHeight() * 0.5 - 60;
+    var y = DataValues.centerY - 60;
     dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
     
     seconds = seconds.format("%02d");    
@@ -143,15 +140,6 @@ class DateAndTime extends WatchUi.Drawable {
       }
     }
     return hours.format("%02d");
-  }
-
-  hidden function calculateOffset(dc, multiplicator, startY, endY) {
-    var maxY = dc.getHeight() - endY;
-    var minY = startY * -1;
-    var window = maxY - minY;
-    var offset = (window * 0.2) * multiplicator + window * 0.1;
-
-    return startY * -1 + offset;
   }
 
 }

@@ -17,7 +17,7 @@ class HRmonitor extends WatchUi.Drawable {
         Drawable.initialize(params);
 
         mWmin = 12;
-        mWmax = $.DataValues.width - 12;
+        mWmax = DataValues.width - 12;
         mWdiff = mWmax - mWmin;
         mHmax = 55;
         mHmin = 35;
@@ -31,7 +31,7 @@ class HRmonitor extends WatchUi.Drawable {
 
         //Draw HR chart        
 
-        var points = getHrPoints($.DataValues.height) as Array<Array>;
+        var points = getHrPoints(DataValues.height) as Array<Array>;
 
         var polyPoints = points[1] as Array<Array>;
         var linePoints = points[0] as Array<Number>;
@@ -57,10 +57,10 @@ class HRmonitor extends WatchUi.Drawable {
 
     hidden function getHrPoints(height){    
 
-        var samples = $.DataValues.hrSamples as Array<Number>;
-        var hrMax = $.DataValues.hrMin;
-        var hrMin = $.DataValues.hrMax;
-        var innerCounter = $.DataValues.hrSamplesCounter;
+        var samples = DataValues.hrSamples as Array<Number>;
+        var hrMax = DataValues.hrMin;
+        var hrMin = DataValues.hrMax;
+        var innerCounter = DataValues.hrSamplesCounter;
 
         //Define line x length
         var xLength = mWdiff / innerCounter;
@@ -121,7 +121,7 @@ class HRmonitor extends WatchUi.Drawable {
     hidden function drawCurrentHr(dc){
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
-        var currentHr = $.DataValues.currentHr;
+        var currentHr = DataValues.currentHr;
 
         if(currentHr == null){
             currentHr = "--";
@@ -129,11 +129,11 @@ class HRmonitor extends WatchUi.Drawable {
             currentHr = currentHr.format("%i");
         }
 
-        dc.drawText($.DataValues.centerX - 25, $.DataValues.centerY + dc.getHeight()/4 + 15, $.fonts.icons, "o", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(DataValues.centerX - 25, DataValues.centerY + DataValues.height/4 + 15, $.fonts.icons, "o", Graphics.TEXT_JUSTIFY_CENTER);
 
         var charArray = currentHr.toCharArray() as Array<Char>;
-        var hrX = $.DataValues.centerX;
-        var hrY = $.DataValues.centerY + 130;
+        var hrX = DataValues.centerX;
+        var hrY = DataValues.centerY + 130;
         var offset = 0;
 
         for(var i = 0; i < charArray.size(); i++ ){

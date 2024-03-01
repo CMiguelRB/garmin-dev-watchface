@@ -16,15 +16,15 @@ class BatteryArc extends WatchUi.Drawable {
   function initialize(params as Object) {
     Drawable.initialize(params);
 
-    mStartDegree = 90 - $.DataValues.batteryArcGapDegree;
-    mEndDegree = 90 + $.DataValues.batteryArcGapDegree;
-    mTotalDegree = 360 - $.DataValues.batteryArcGapDegree * 2;
-    mRadius = $.DataValues.batteryArcRadius;
+    mStartDegree = 90 - DataValues.batteryArcGapDegree;
+    mEndDegree = 90 + DataValues.batteryArcGapDegree;
+    mTotalDegree = 360 - DataValues.batteryArcGapDegree * 2;
+    mRadius = DataValues.batteryArcRadius;
   }
 
   function draw(dc) {    
-    var remainingBatteryInDays = $.DataValues.batteryInDays;
-    var remainingBattery = $.DataValues.batteryInPercentage;
+    var remainingBatteryInDays = DataValues.batteryInDays;
+    var remainingBattery = DataValues.batteryInPercentage;
     dc.setPenWidth(12);
     drawRemainingArc(dc);
     drawProgressArc(dc, remainingBattery);
@@ -41,8 +41,8 @@ class BatteryArc extends WatchUi.Drawable {
       drawEndpoint(dc, endDegree, 0, 0);
 
       dc.drawArc(
-        $.DataValues.centerX,
-        $.DataValues.centerY,
+        DataValues.centerX,
+        DataValues.centerY,
         mRadius,
         Graphics.ARC_CLOCKWISE,
         mStartDegree,
@@ -58,8 +58,8 @@ class BatteryArc extends WatchUi.Drawable {
     drawEndpoint(dc, mEndDegree, 0, 0);
 
     dc.drawArc(
-      $.DataValues.centerX,
-      $.DataValues.centerY,
+      DataValues.centerX,
+      DataValues.centerY,
       mRadius,
       Graphics.ARC_CLOCKWISE,
       mStartDegree,
@@ -90,7 +90,7 @@ class BatteryArc extends WatchUi.Drawable {
     }
 
 
-    var  x = $.DataValues.centerX;
+    var  x = DataValues.centerX;
     var  y = 15; 
     
 
@@ -102,7 +102,7 @@ class BatteryArc extends WatchUi.Drawable {
         remainingBattery = remainingBattery + "d";
     }else{
         remainingBattery = remainingBattery + "%";
-        x = $.DataValues.centerX - 10;
+        x = DataValues.centerX - 10;
     }
 
     dc.drawText(
@@ -134,12 +134,12 @@ class BatteryArc extends WatchUi.Drawable {
 
   hidden function getX(dc, degree) {
     degree = Math.toRadians(degree);
-    return ($.DataValues.centerY).toFloat() + mRadius.toFloat() * Math.cos(degree);
+    return (DataValues.centerY).toFloat() + mRadius.toFloat() * Math.cos(degree);
   }
 
   hidden function getY(dc, degree) {
     degree = Math.toRadians(degree);
-    return $.DataValues.height.toFloat() - (($.DataValues.centerY).toFloat() + mRadius.toFloat() * Math.sin(degree));
+    return DataValues.height.toFloat() - ((DataValues.centerY).toFloat() + mRadius.toFloat() * Math.sin(degree));
   }
 
   hidden function getFillDegree(fillLevel) {

@@ -11,8 +11,8 @@ class StepsGoal extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var steps = $.DataValues.steps;
-        var stepsGoal = $.DataValues.stepsGoal;
+        var steps = DataValues.steps;
+        var stepsGoal = DataValues.stepsGoal;
         drawArcs(dc, steps, stepsGoal);
         drawInfo(dc, steps, stepsGoal);
     }
@@ -24,16 +24,16 @@ class StepsGoal extends WatchUi.Drawable {
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
 
-        dc.drawText(255, 128, $.fonts.icons, "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(270, 43, $.fonts.icons, "j", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.drawText(305, 123, $.fonts.data, steps, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(340, 125, $.fonts.data, steps, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     hidden function drawArcs(dc, steps, stepsGoal){
         dc.setPenWidth(10);
 
         var startDegree = 25;
-        var endDegree = 60;
+        var endDegree = 65;
         var sections = 4;
         var gap = 2;
         var diffDegree = endDegree - startDegree;
@@ -46,7 +46,7 @@ class StepsGoal extends WatchUi.Drawable {
         var endSection = sectionsLength + startDegree;
 
         for(var i = 0; i<sections;i++){
-            dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
+            dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
             startSection = sectionsLength + gap + startSection;
             endSection = endSection + sectionsLength + gap;
         }      
@@ -74,11 +74,11 @@ class StepsGoal extends WatchUi.Drawable {
 
         for(var i = 0; i<sections;i++){
             if(endSection < completionDegree){
-                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
+                dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
             }else if(startSection - gap <= completionDegree && completionDegree <= startSection){
                 continue;
             }else{
-                dc.drawArc(dc.getWidth()/2, dc.getWidth()/2, dc.getWidth()/2-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, completionDegree);
+                dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, completionDegree);
                 break;
             }            
             startSection = sectionsLength + gap + startSection;

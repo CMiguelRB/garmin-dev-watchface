@@ -15,8 +15,8 @@ class DailyDistance extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        var activities = $.DataValues.activities;
-        var distance = $.DataValues.distance;
+        var activities = DataValues.activities;
+        var distance = DataValues.distance;
         drawBars(dc, activities, distance);
         drawInfo(dc, distance);
     }
