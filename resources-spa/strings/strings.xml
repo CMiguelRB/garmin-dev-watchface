@@ -8,6 +8,7 @@
   <string id="linesColorTitle">Color líneas</string>
   <string id="batteryInDaysTitle">Batería en días</string>
   <string id="showSecondsTitle">Mostrar segundos</string>
+  <string id="showHrChartTitle">Mostrar gráfica FC</string>
 
   <string id="DateMonth1">Ene</string>
   <string id="DateMonth2">Feb</string>

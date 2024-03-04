@@ -7,6 +7,7 @@ import Toybox.Position;
 import Toybox.Application;
 import Toybox.SensorHistory;
 import Toybox.Math;
+import Toybox.Lang;
 
 module DataRetriever {
 
@@ -42,7 +43,7 @@ module DataRetriever {
              || Time.Gregorian.info(now, Time.FORMAT_MEDIUM).day
              != Time.Gregorian.info(DataValues.lastSunEventsRetrieval, Time.FORMAT_MEDIUM).day)
             || DataValues.updateSunEvents == true){
-            var lastLocation = DataValues.lastLocation;
+            var lastLocation = DataValues.lastLocation as Array<Double>;
             if(lastLocation != null){
                 var sunset = null;
                 var sunrise = null;
@@ -75,7 +76,7 @@ module DataRetriever {
 
     function getLocation(){
         var location = Weather.getCurrentConditions().observationLocationPosition;
-        var lastLocation = DataValues.lastLocation;
+        var lastLocation = DataValues.lastLocation as Array<Double>;
         if(location != null && lastLocation != null){
             location = location.toDegrees();
             if(location[0] != lastLocation[0] || location[1] != lastLocation[1]){
@@ -90,27 +91,30 @@ module DataRetriever {
 
     function getHeartRate(){
         DataValues.currentHr = Activity.getActivityInfo().currentHeartRate;
-        var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(3600), false);
-        DataValues.hrMax = hrIterator.getMax();
-        DataValues.hrMin = hrIterator.getMin();
-        var samples = {};
-        var counter = 0;
-        var innerCounter = 0;
-        var sample = hrIterator.next();
-        while (sample != null){
-            if(counter % 3 == 0){
-                if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-                        samples[innerCounter] = sample.heartRate;
-                }else{
-                    samples[innerCounter] = null;
-                }    
-                innerCounter++;
-            }   
-            sample = hrIterator.next();  
-            counter++;              
+        var showHrChart = Properties.getValue("showHrChart");
+        if(showHrChart == true){
+            var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(3600), false);
+            DataValues.hrMax = hrIterator.getMax();
+            DataValues.hrMin = hrIterator.getMin();
+            var samples = {};
+            var counter = 0;
+            var innerCounter = 0;
+            var sample = hrIterator.next();
+            while (sample != null){
+                if(counter % 2 == 0){
+                    if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
+                            samples[innerCounter] = sample.heartRate;
+                    }else{
+                        samples[innerCounter] = null;
+                    }    
+                    innerCounter++;
+                }   
+                sample = hrIterator.next();  
+                counter++;              
+            }
+            DataValues.hrSamples = samples;
+            DataValues.hrSamplesCounter = innerCounter;
         }
-        DataValues.hrSamples = samples;
-        DataValues.hrSamplesCounter = innerCounter;
     }
 
     function getSteps(){

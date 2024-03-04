@@ -8,6 +8,7 @@
   <string id="batteryInDaysTitle">Battery in days</string>
   <string id="linesColorTitle">Lines color</string>
   <string id="showSecondsTitle">Show seconds</string>
+  <string id="showHrChartTitle">Show HR chart</string>
 
   <string id="DateMonth1">Jan</string>
   <string id="DateMonth2">Feb</string>

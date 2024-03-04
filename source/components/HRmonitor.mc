@@ -1,7 +1,7 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
 import Toybox.Lang;
-import Toybox.ActivityMonitor;
+import Toybox.Application;
 
 
 class HRmonitor extends WatchUi.Drawable {
@@ -24,14 +24,18 @@ class HRmonitor extends WatchUi.Drawable {
 
     function draw(dc){
 
-        //Draw HR icon and current HR value
-        drawCurrentHr(dc);
+        var showHrChart = Properties.getValue("showHrChart");
 
-        //Draw HR chart        
-        drawHrChart(dc, DataValues.height) as Array<Array>;        
+        //Draw HR icon and current HR value
+        drawCurrentHr(dc, showHrChart);
+
+        //Draw HR chart       
+        if(showHrChart == true && DataValues.hrSamples != null && DataValues.hrSamplesCounter > 0){
+            drawHrChart(dc);
+        }     
     }
 
-    hidden function drawHrChart(dc, height){    
+    hidden function drawHrChart(dc){    
 
         dc.setPenWidth(6);
 
@@ -47,7 +51,7 @@ class HRmonitor extends WatchUi.Drawable {
 
         //Get firtst Y transformed point
         var sample = samples[0];
-        var startYLine = transformYValue(sample, hrMax, hrMin, height);
+        var startYLine = transformYValue(sample, hrMax, hrMin);
         
         //Initialize coordinates
         var startPoint = [mWmin, startYLine];
@@ -63,11 +67,11 @@ class HRmonitor extends WatchUi.Drawable {
             if(currentSample == null){
                 startPoint[0] = endPoint[0];
                 endPoint[0] = endPoint[0] + xLength;
-                polyPoints[i*2] = [startPoint[0]-xLength, height];
-                polyPoints[i*2+1] = [endPoint[0]-xLength, height];
+                polyPoints[i*2] = [startPoint[0]-xLength, DataValues.height];
+                polyPoints[i*2+1] = [endPoint[0]-xLength, DataValues.height];
                 continue;           
             }
-            endPoint[1] = transformYValue(nextSample, hrMax, hrMin, height);                     
+            endPoint[1] = transformYValue(nextSample, hrMax, hrMin);                     
             dc.drawLine(startPoint[0], startPoint[1], endPoint[0], endPoint[1]);         
             polyPoints[i*2] = [startPoint[0], startPoint[1]];
             polyPoints[i*2+1] = [endPoint[0], endPoint[1]];
@@ -77,15 +81,15 @@ class HRmonitor extends WatchUi.Drawable {
         }
 
         //Finish polygon
-        polyPoints[(innerCounter*2)-2] = [endPoint[0]-xLength, height];
-        polyPoints[(innerCounter*2)-1] = [mWmin, height];
+        polyPoints[(innerCounter*2)-2] = [endPoint[0]-xLength, DataValues.height];
+        polyPoints[(innerCounter*2)-1] = [mWmin, DataValues.height];
 
         dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         dc.fillPolygon(polyPoints);
     }
 
-    hidden function transformYValue(sample, hrMin, hrMax, height){
+    hidden function transformYValue(sample, hrMin, hrMax){
         var hrDiff = hrMax - hrMin;
         var yLineConv;
         if(sample != null){
@@ -94,11 +98,11 @@ class HRmonitor extends WatchUi.Drawable {
         }else{
             yLineConv = mHmax;
         } 
-        yLineConv = height - yLineConv;
+        yLineConv = DataValues.height - yLineConv;
         return yLineConv;
     }
 
-    hidden function drawCurrentHr(dc){
+    hidden function drawCurrentHr(dc, showHrChart){
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
 
         var currentHr = DataValues.currentHr;
@@ -109,11 +113,18 @@ class HRmonitor extends WatchUi.Drawable {
             currentHr = currentHr.format("%i");
         }
 
-        dc.drawText(DataValues.centerX - 25, DataValues.centerY + DataValues.height/4 + 15, $.fonts.icons, "o", Graphics.TEXT_JUSTIFY_CENTER);
+        var variableY = 130;
+
+        if(showHrChart == false){
+            variableY = 160;
+        }
+
+
+        dc.drawText(DataValues.centerX - 30, DataValues.centerY + variableY - 14, $.fonts.icons, "o", Graphics.TEXT_JUSTIFY_CENTER);
 
         var charArray = currentHr.toCharArray() as Array<Char>;
-        var hrX = DataValues.centerX;
-        var hrY = DataValues.centerY + 130;
+        var hrX = DataValues.centerX - 5;
+        var hrY = DataValues.centerY + variableY;
         var offset = 0;
 
         for(var i = 0; i < charArray.size(); i++ ){

@@ -8,4 +8,5 @@
   <property id="backgroundColor" type="string">000000</property>
   <property id="batteryInDays" type="boolean">true</property>
   <property id="showSeconds" type="boolean">true</property>
+  <property id="showHrChart" type="boolean">true</property>
 </properties>
