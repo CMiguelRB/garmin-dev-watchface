@@ -1,10 +1,11 @@
 <properties>  
   <property id="layout" type="number">0</property>
-  <property id="primaryColor" type="string">03c4a1</property>
-  <property id="secondaryColor" type="string">9F70F2</property>
-  <property id="inactiveColor" type="string">3d3b40</property>
-  <property id="textColor" type="string">f8f4ec</property>
-  <property id="linesColor" type="string">9F70F2</property>
+  <property id="primaryColor" type="string">59886B</property>
+  <property id="secondaryColor" type="string">E9B824</property>
+  <property id="inactiveColor" type="string">3D3D39</property>
+  <property id="textColor" type="string">FAEDD2</property>
+  <property id="linesColor" type="string">E9B824</property>
   <property id="backgroundColor" type="string">000000</property>
   <property id="batteryInDays" type="boolean">true</property>
+  <property id="showSeconds" type="boolean">true</property>
 </properties>

@@ -106,7 +106,11 @@ class DateAndTime extends WatchUi.Drawable {
       dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
       dc.drawText(lastPosition+45, DataValues.centerY - 20, $.fonts.icons, "k", Graphics.TEXT_JUSTIFY_CENTER);
     }    
-    updateSeconds(dc, now.sec, lastPosition);    
+    var showSeconds = Properties.getValue("showSeconds");
+
+    if(showSeconds == true){
+      updateSeconds(dc, now.sec, lastPosition);    
+    }
   }
 
   function updateSeconds(dc, seconds, lastPosition) {

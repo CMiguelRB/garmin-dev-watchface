@@ -90,7 +90,7 @@ module DataRetriever {
 
     function getHeartRate(){
         DataValues.currentHr = Activity.getActivityInfo().currentHeartRate;
-        var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(7200), false);
+        var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(3600), false);
         DataValues.hrMax = hrIterator.getMax();
         DataValues.hrMin = hrIterator.getMin();
         var samples = {};
@@ -98,7 +98,7 @@ module DataRetriever {
         var innerCounter = 0;
         var sample = hrIterator.next();
         while (sample != null){
-            if(counter % 5 == 0){
+            if(counter % 3 == 0){
                 if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
                         samples[innerCounter] = sample.heartRate;
                 }else{
