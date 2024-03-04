@@ -18,7 +18,7 @@ class StepsGoal extends WatchUi.Drawable {
     }
 
     hidden function drawInfo(dc, steps, stepsGoal){
-        if(steps > stepsGoal){
+        if(steps >= stepsGoal){
             dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
@@ -50,8 +50,8 @@ class StepsGoal extends WatchUi.Drawable {
             startSection = sectionsLength + gap + startSection;
             endSection = endSection + sectionsLength + gap;
         }      
-
-        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);        
+        
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         var goalPercentage = (100 * steps / stepsGoal).toFloat();
 

@@ -27,7 +27,7 @@ class ActivityGoal extends WatchUi.Drawable {
     hidden function drawInfo(dc, activity, activityGoal){
         if(activity == null || activityGoal == null){
             dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
-        }else if(activity.total > activityGoal){
+        }else if(activity.total >= activityGoal){
             dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
@@ -57,13 +57,14 @@ class ActivityGoal extends WatchUi.Drawable {
             x = x + stepsLength + gap;
         }   
 
-       if(activity == null || activityGoal == null || activity.total == 0 || activityGoal == 0){
-           return;
-       }
-
-        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+        if(activity == null || activityGoal == null || activity.total == 0 || activityGoal == 0){
+            return;
+        }
 
         var goalPercentage = (100 * activity.total / activityGoal).toFloat();
+
+        
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
         var translatedPercentage = (goalPercentage/100).toFloat();
 
