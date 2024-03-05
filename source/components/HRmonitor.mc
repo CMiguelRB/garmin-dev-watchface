@@ -51,7 +51,7 @@ class HRmonitor extends WatchUi.Drawable {
         var samplesCounter = DataValues.hrSamplesCounter;
 
         var startX = mWmin;
-        var xLength = (mWdiff) / samplesCounter;
+        var xLength = (mWdiff-samplesCounter) / samplesCounter;
         var gap = 1;
         var endY = DataValues.height;
 

@@ -21,7 +21,7 @@ class StepsGoal extends WatchUi.Drawable {
 
     hidden function drawInfo(dc, steps, stepsGoal){
         if(steps >= stepsGoal){
-            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }
