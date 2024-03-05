@@ -41,8 +41,6 @@ class SunEvents extends WatchUi.Drawable {
 
         dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT); 
 
-        var per = DataValues.dayPercentage;
-
         var startDegree = 165;
         var endDegree = 15;
         var totalDegree = startDegree - endDegree;
@@ -59,32 +57,36 @@ class SunEvents extends WatchUi.Drawable {
             endSection = endSection - sectionsLength - gap;
         }  
 
-        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+        if(DataValues.dayPercentage != null){
+             dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
-        var completionDegree;
+            var completionDegree;
 
-        if(per < 1){
-            return;
-        }else if(per > 100){
-            completionDegree = endDegree;
-        }else{
-            completionDegree = startDegree - ((totalDegree * per) / 100);
-        }
+            var per = DataValues.dayPercentage;
 
-        startSection = startDegree;
-        endSection = startDegree - sectionsLength;
-
-        for(var i = 0; i<sections;i++){
-            if(endSection > completionDegree){
-                dc.drawArc(157, 83, 30, Graphics.ARC_CLOCKWISE, startSection, endSection);
-            }else if(startSection  <= completionDegree && completionDegree <= startSection + gap){
-                continue;
+            if(per < 1){
+                return;
+            }else if(per > 100){
+                completionDegree = endDegree;
             }else{
-                dc.drawArc(157, 83, 30, Graphics.ARC_CLOCKWISE, startSection, completionDegree);
-                break;
-            }            
-            startSection = startSection - gap - sectionsLength;
-            endSection = endSection - sectionsLength - gap;
+                completionDegree = startDegree - ((totalDegree * per) / 100);
+            }
+
+            startSection = startDegree;
+            endSection = startDegree - sectionsLength;
+
+            for(var i = 0; i<sections;i++){
+                if(endSection > completionDegree){
+                    dc.drawArc(157, 83, 30, Graphics.ARC_CLOCKWISE, startSection, endSection);
+                }else if(startSection  <= completionDegree && completionDegree <= startSection + gap){
+                    continue;
+                }else{
+                    dc.drawArc(157, 83, 30, Graphics.ARC_CLOCKWISE, startSection, completionDegree);
+                    break;
+                }            
+                startSection = startSection - gap - sectionsLength;
+                endSection = endSection - sectionsLength - gap;
+            }
         }
     }
 }

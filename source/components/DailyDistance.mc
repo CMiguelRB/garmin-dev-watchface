@@ -27,9 +27,11 @@ class DailyDistance extends WatchUi.Drawable {
 
         dc.drawText(315, 170, $.fonts.icons, "g", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        var distanceKm = (distance.toFloat() / 100000).format("%.1f");
+        if(distance != null){
+            var distanceKm = (distance.toFloat() / 100000).format("%.1f");
 
-        dc.drawText(345, 173, $.fonts.data, distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(345, 173, $.fonts.data, distanceKm, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
     }
 
     hidden function drawBars(dc, activities, distance){
@@ -38,41 +40,43 @@ class DailyDistance extends WatchUi.Drawable {
 
         dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
-        var x = 285;
-        var base = 240;
-        var hDiff = 45;
-        var width = 12;
-        var gap = 3;
-        var dMax = 0;
-        var dMin = 99999999;
-        activities = activities.reverse() as Array<ActivityMonitor.History>;
-        var dist = new ActivityMonitor.History();
-        dist.distance = distance;
-        activities.add(dist);
-        activities = activities.slice(1,null);
+        if(activities != null && distance != null){
+            var x = 285;
+            var base = 240;
+            var hDiff = 45;
+            var width = 12;
+            var gap = 3;
+            var dMax = 0;
+            var dMin = 99999999;
+            activities = activities.reverse() as Array<ActivityMonitor.History>;
+            var dist = new ActivityMonitor.History();
+            dist.distance = distance;
+            activities.add(dist);
+            activities = activities.slice(1,null);
 
-        for(var i = 0; i<activities.size(); i++){
-            if(activities[i] != null){
-                if(activities[i].distance > dMax){
-                    dMax = activities[i].distance;
+            for(var i = 0; i<activities.size(); i++){
+                if(activities[i] != null){
+                    if(activities[i].distance > dMax){
+                        dMax = activities[i].distance;
+                    }
+                    if(activities[i].distance < dMin){
+                        dMin = activities[i].distance;
+                    }                
                 }
-                if(activities[i].distance < dMin){
-                    dMin = activities[i].distance;
-                }                
             }
-        }
 
-        for(var i = 0; i < activities.size(); i++){
-            var d = activities[i].distance;
-            if(i == activities.size()-1){
-                dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
+            for(var i = 0; i < activities.size(); i++){
+                var d = activities[i].distance;
+                if(i == activities.size()-1){
+                    dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
+                }
+                if(d != null){
+                    var y = getY(d, dMax, dMin, hDiff, base);
+                    var pts = [[x, base],[x, y],[x+width, y],[x+width, base]];
+                    dc.fillPolygon(pts);
+                }
+                x = x + width + gap;
             }
-            if(d != null){
-                var y = getY(d, dMax, dMin, hDiff, base);
-                var pts = [[x, base],[x, y],[x+width, y],[x+width, base]];
-                dc.fillPolygon(pts);
-            }
-            x = x + width + gap;
         }
     }
 

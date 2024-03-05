@@ -37,56 +37,31 @@ class HRmonitor extends WatchUi.Drawable {
 
     hidden function drawHrChart(dc){    
 
-        dc.setPenWidth(6);
+        var chartColorValue = Properties.getValue("chartColor");
 
-        dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
+        if(chartColorValue == 0){
+            dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
+        }else{
+            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+        }
 
         var samples = DataValues.hrSamples as Array<Number>;
         var hrMax = DataValues.hrMin;
         var hrMin = DataValues.hrMax;
-        var innerCounter = DataValues.hrSamplesCounter;
+        var samplesCounter = DataValues.hrSamplesCounter;
 
-        //Define line x length
-        var xLength = (mWdiff + 10) / innerCounter;
+        var startX = mWmin;
+        var xLength = (mWdiff) / samplesCounter;
+        var gap = 1;
+        var endY = DataValues.height;
 
-        //Get firtst Y transformed point
-        var sample = samples[0];
-        var startYLine = transformYValue(sample, hrMax, hrMin);
-        
-        //Initialize coordinates
-        var startPoint = [mWmin, startYLine];
-        var endPoint = [(mWmin+xLength), null];
-        
-        //initialize arrays
-        var polyPoints = new [(innerCounter*2)];
-
-        //Loop samples
-        for(var i = 0; i<innerCounter-1; i++){
-            var currentSample = samples[i];
-            var nextSample = samples[(i+1)];
-            if(currentSample == null){
-                startPoint[0] = endPoint[0];
-                endPoint[0] = endPoint[0] + xLength;
-                polyPoints[i*2] = [startPoint[0]-xLength, DataValues.height];
-                polyPoints[i*2+1] = [endPoint[0]-xLength, DataValues.height];
-                continue;           
+        for(var i = 0; i<samplesCounter; i++){
+            if(samples[i] != null){
+                var startY = transformYValue(samples[i], hrMin, hrMax);
+                dc.fillRectangle(startX, startY, xLength, endY);
             }
-            endPoint[1] = transformYValue(nextSample, hrMax, hrMin);                     
-            dc.drawLine(startPoint[0], startPoint[1], endPoint[0], endPoint[1]);         
-            polyPoints[i*2] = [startPoint[0], startPoint[1]];
-            polyPoints[i*2+1] = [endPoint[0], endPoint[1]];
-            startPoint[0] = endPoint[0];
-            startPoint[1] = endPoint[1];
-            endPoint[0] = endPoint[0] + xLength;
+            startX += xLength + gap;
         }
-
-        //Finish polygon
-        polyPoints[(innerCounter*2)-2] = [endPoint[0]-xLength, DataValues.height];
-        polyPoints[(innerCounter*2)-1] = [mWmin, DataValues.height];
-
-        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
-
-        dc.fillPolygon(polyPoints);
     }
 
     hidden function transformYValue(sample, hrMin, hrMax){

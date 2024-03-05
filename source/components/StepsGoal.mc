@@ -14,7 +14,9 @@ class StepsGoal extends WatchUi.Drawable {
         var steps = DataValues.steps;
         var stepsGoal = DataValues.stepsGoal;
         drawArcs(dc, steps, stepsGoal);
-        drawInfo(dc, steps, stepsGoal);
+        if(steps != null){
+            drawInfo(dc, steps, stepsGoal);
+        }
     }
 
     hidden function drawInfo(dc, steps, stepsGoal){
@@ -50,39 +52,41 @@ class StepsGoal extends WatchUi.Drawable {
             startSection = sectionsLength + gap + startSection;
             endSection = endSection + sectionsLength + gap;
         }      
-        
-        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
-        var goalPercentage = (100 * steps / stepsGoal).toFloat();
+        if(steps != null && stepsGoal != null){
+            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
 
-        var translatedPercentage = (goalPercentage/100).toFloat();
+            var goalPercentage = (100 * steps / stepsGoal).toFloat();
 
-        var completionDegree = Math.floor(diffDegree * translatedPercentage);
+            var translatedPercentage = (goalPercentage/100).toFloat();
 
-        if(completionDegree > diffDegree){
-            completionDegree = diffDegree;
+            var completionDegree = Math.floor(diffDegree * translatedPercentage);
+
+            if(completionDegree > diffDegree){
+                completionDegree = diffDegree;
+            }
+
+            completionDegree = startDegree + completionDegree;
+
+            if(steps == 0 || stepsGoal == 0 || completionDegree == 25.0){
+                return;
+            }
+            
+            startSection = 25;
+            endSection = sectionsLength + startSection;
+
+            for(var i = 0; i<sections;i++){
+                if(endSection < completionDegree){
+                    dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
+                }else if(startSection - gap <= completionDegree && completionDegree <= startSection){
+                    continue;
+                }else{
+                    dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, completionDegree);
+                    break;
+                }            
+                startSection = sectionsLength + gap + startSection;
+                endSection = endSection + sectionsLength + gap;
+            }     
         }
-
-        completionDegree = startDegree + completionDegree;
-
-        if(steps == 0 || stepsGoal == 0 || completionDegree == 25.0){
-            return;
-        }
-        
-        startSection = 25;
-        endSection = sectionsLength + startSection;
-
-        for(var i = 0; i<sections;i++){
-            if(endSection < completionDegree){
-                dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, endSection);
-            }else if(startSection - gap <= completionDegree && completionDegree <= startSection){
-                continue;
-            }else{
-                dc.drawArc(DataValues.centerX, DataValues.centerX, DataValues.centerX-30, Graphics.ARC_COUNTER_CLOCKWISE, startSection, completionDegree);
-                break;
-            }            
-            startSection = sectionsLength + gap + startSection;
-            endSection = endSection + sectionsLength + gap;
-        }     
     }
 }

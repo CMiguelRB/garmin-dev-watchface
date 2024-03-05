@@ -17,6 +17,12 @@
     <setting propertyKey="@Properties.backgroundColor" title="@Strings.backgroundColorTitle">
         <settingConfig type="alphaNumeric"/>
     </setting>
+    <setting propertyKey="@Properties.chartColor" title="@Strings.chartColorTitle" prompt="@Strings.chartColorPrompt">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.primary</listEntry>
+            <listEntry value="0">@Strings.secondary</listEntry>
+        </settingConfig>
+    </setting>
     <setting propertyKey="@Properties.batteryInDays" title="@Strings.batteryInDaysTitle">
         <settingConfig type="boolean"/>
     </setting>

@@ -9,6 +9,10 @@
   <string id="linesColorTitle">Lines color</string>
   <string id="showSecondsTitle">Show seconds</string>
   <string id="showHrChartTitle">Show HR chart</string>
+  <string id="chartColorTitle">Chart color</string>
+  <string id="chartColorPrompt">xxxx</string>
+  <string id="primary">Primary</string>
+  <string id="secondary">Accent</string>
 
   <string id="DateMonth1">Jan</string>
   <string id="DateMonth2">Feb</string>

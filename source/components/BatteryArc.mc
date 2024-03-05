@@ -27,8 +27,10 @@ class BatteryArc extends WatchUi.Drawable {
     var remainingBattery = DataValues.batteryInPercentage;
     dc.setPenWidth(12);
     drawRemainingArc(dc);
-    drawProgressArc(dc, remainingBattery);
-    drawIcon(dc, remainingBattery, remainingBatteryInDays);
+    if(remainingBattery != null){
+      drawProgressArc(dc, remainingBattery);
+      drawIcon(dc, remainingBattery, remainingBatteryInDays);
+    }
   }
 
   hidden function drawProgressArc(dc, fillLevel) {

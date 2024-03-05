@@ -5,6 +5,7 @@
   <property id="inactiveColor" type="string">3D3D39</property>
   <property id="textColor" type="string">FAEDD2</property>
   <property id="linesColor" type="string">E9B824</property>
+  <property id="chartColor" type="number">0</property>
   <property id="backgroundColor" type="string">000000</property>
   <property id="batteryInDays" type="boolean">true</property>
   <property id="showSeconds" type="boolean">true</property>

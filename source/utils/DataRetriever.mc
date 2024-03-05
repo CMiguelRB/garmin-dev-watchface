@@ -93,27 +93,24 @@ module DataRetriever {
         DataValues.currentHr = Activity.getActivityInfo().currentHeartRate;
         var showHrChart = Properties.getValue("showHrChart");
         if(showHrChart == true){
-            var hrIterator = ActivityMonitor.getHeartRateHistory(new Time.Duration(3600), false);
+            var samplesNumber = 60;
+            var hrIterator = ActivityMonitor.getHeartRateHistory(samplesNumber, false);
             DataValues.hrMax = hrIterator.getMax();
             DataValues.hrMin = hrIterator.getMin();
-            var samples = {};
-            var counter = 0;
-            var innerCounter = 0;
+            var samples = new [samplesNumber];
             var sample = hrIterator.next();
-            while (sample != null){
-                if(counter % 2 == 0){
-                    if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
-                            samples[innerCounter] = sample.heartRate;
-                    }else{
-                        samples[innerCounter] = null;
-                    }    
-                    innerCounter++;
-                }   
+            var counter = 0;
+            while (sample != null){                
+                if (sample.heartRate != ActivityMonitor.INVALID_HR_SAMPLE) {
+                        samples[counter] = sample.heartRate;
+                }else{
+                    samples[counter] = null;
+                }          
                 sample = hrIterator.next();  
                 counter++;              
             }
             DataValues.hrSamples = samples;
-            DataValues.hrSamplesCounter = innerCounter;
+            DataValues.hrSamplesCounter = samplesNumber;
         }
     }
 

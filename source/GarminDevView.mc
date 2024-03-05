@@ -97,16 +97,11 @@ class GarminDevView extends WatchUi.WatchFace {
 
   // Update the view
   function onUpdate(dc) {
-    // Call the parent onUpdate function to redraw the layout
-    var layout = chooseLayout(dc, false);
-    if (layout != null) {
-      setLayout(layout);
-    }
     if(dc has :setAntiAlias) {
         dc.setAntiAlias(true);
     }
-    DataRetriever.retrieveData();
     View.onUpdate(dc);
+    DataRetriever.retrieveData();
   }
 
   // Called when this View is removed from the screen. Save the

@@ -9,6 +9,10 @@
   <string id="batteryInDaysTitle">Batería en días</string>
   <string id="showSecondsTitle">Mostrar segundos</string>
   <string id="showHrChartTitle">Mostrar gráfica FC</string>
+  <string id="chartColorTitle">Color gráfica</string>
+  <string id="chartColorPrompt">xxxx</string>
+  <string id="primary">Principal</string>
+  <string id="secondary">Acento</string>
 
   <string id="DateMonth1">Ene</string>
   <string id="DateMonth2">Feb</string>

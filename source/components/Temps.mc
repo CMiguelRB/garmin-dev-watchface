@@ -16,10 +16,10 @@ class Temps extends WatchUi.Drawable {
         var high = DataValues.highTemp;
 
         if(low == null){
-            low = "-";
+            low = ".";
         }
         if(high == null){
-            high = "-";
+            high = ".";
         }
         
         dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);   
