@@ -1,5 +1,4 @@
-<properties>  
-  <property id="layout" type="number">0</property>
+<properties>
   <property id="primaryColor" type="string">59886B</property>
   <property id="secondaryColor" type="string">E9B824</property>
   <property id="inactiveColor" type="string">3D3D39</property>

@@ -7,14 +7,13 @@ import Toybox.Time;
 
 class DateAndTime extends WatchUi.Drawable {
 
-  var mBurnInProtectionMode;
+  
 
   var DayOfWeek as Array<Symbol> = [];
   var Months as Array<Symbol> = [];
 
   function initialize(params as Object) {
     Drawable.initialize(params);
-    mBurnInProtectionMode = params[:burnInProtectionMode] && System.getDeviceSettings().requiresBurnInProtection;
 
     Months = [
       Rez.Strings.DateMonth1,
