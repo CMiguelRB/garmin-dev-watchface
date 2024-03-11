@@ -7,7 +7,8 @@ import Toybox.Time;
 
 class DateAndTime extends WatchUi.Drawable {
 
-  
+  var currentDate;
+  var auxDay;
 
   var DayOfWeek as Array<Symbol> = [];
   var Months as Array<Symbol> = [];
@@ -43,8 +44,14 @@ class DateAndTime extends WatchUi.Drawable {
 
   function draw(dc) {
     var is12Hour = !System.getDeviceSettings().is24Hour;
-    var now = Time.Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-    var date = getDateLine(now);
+    var currentMoment = Time.now();   
+    var now = Time.Gregorian.info(currentMoment, Time.FORMAT_SHORT);
+    
+    if(auxDay == null || now.day != auxDay){
+      currentDate = getDateLine(now);
+      auxDay = now.day;
+    }
+    
     var hours = getHours(now, is12Hour);
     var minutes = now.min.format("%02d");
 
@@ -93,7 +100,7 @@ class DateAndTime extends WatchUi.Drawable {
       // Date
       var dateX = lastPosition + 18;
       var dateY = 112;
-      dc.drawText(dateX, dateY, $.fonts.date, date, Graphics.TEXT_JUSTIFY_RIGHT);
+      dc.drawText(dateX, dateY, $.fonts.date, currentDate, Graphics.TEXT_JUSTIFY_RIGHT);
 
     if (is12Hour) {
       var meridiem = (now.hour < 12) ? "AM" : "PM";
@@ -129,7 +136,7 @@ class DateAndTime extends WatchUi.Drawable {
     return format(
       "$1$, $2$ $3$", 
       [ Settings.resource(DayOfWeek[(now.day_of_week as Number) - 1]), now.day.format("%02d"), Settings.resource(Months[(now.month as Number) - 1]) ]
-    );    
+    );
   }
 
   hidden function getHours(now, is12Hour) {
