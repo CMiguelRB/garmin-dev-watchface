@@ -158,7 +158,10 @@ module DataRetriever {
     }
 
     function getTemps(){
-        DataValues.lowTemp = Weather.getCurrentConditions().lowTemperature;
-        DataValues.highTemp = Weather.getCurrentConditions().highTemperature;
+        var currentConditions = Weather.getCurrentConditions();
+        if(currentConditions != null){
+            DataValues.lowTemp = currentConditions.lowTemperature.toNumber();
+            DataValues.highTemp = currentConditions.highTemperature.toNumber();
+        }
     }
 }
