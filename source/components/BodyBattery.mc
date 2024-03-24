@@ -21,7 +21,7 @@ class BodyBattery extends WatchUi.Drawable {
         if(bodyBattery == null){
             dc.setColor(Color.getColor("inactive"), Graphics.COLOR_TRANSPARENT);
         }else if(bodyBattery == 100){
-            dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Color.getColor("secondary"), Graphics.COLOR_TRANSPARENT);
         }else{
             dc.setColor(Color.getColor("text"), Graphics.COLOR_TRANSPARENT);
         }

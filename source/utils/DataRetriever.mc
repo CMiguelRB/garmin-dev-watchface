@@ -115,8 +115,11 @@ module DataRetriever {
     }
 
     function getSteps(){
-        DataValues.steps = ActivityMonitor.getInfo().steps;
-        DataValues.stepsGoal = ActivityMonitor.getInfo().stepGoal;
+        var activityInfo = ActivityMonitor.getInfo();
+        if(activityInfo != null){
+            DataValues.steps = activityInfo.steps;
+            DataValues.stepsGoal = activityInfo.stepGoal;
+        }
     }
 
     function getBodyBattery(){
@@ -134,8 +137,11 @@ module DataRetriever {
     }
 
     function getActivityGoal(){
-        DataValues.activity = ActivityMonitor.getInfo().activeMinutesWeek;
-        DataValues.activityGoal = ActivityMonitor.getInfo().activeMinutesWeekGoal;
+        var activityInfo = ActivityMonitor.getInfo();
+        if(activityInfo != null){
+            DataValues.activity = activityInfo.activeMinutesWeek;
+            DataValues.activityGoal = activityInfo.activeMinutesWeekGoal;
+        }
     }
 
     function getAltitude(){
