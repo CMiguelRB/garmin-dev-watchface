@@ -13,6 +13,7 @@
   <string id="chartColorPrompt">xxxx</string>
   <string id="primary">Principal</string>
   <string id="secondary">Acento</string>
+  <string id="alert">Alerta</string>
 
   <string id="DateMonth1">Ene</string>
   <string id="DateMonth2">Feb</string>

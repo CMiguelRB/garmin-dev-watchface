@@ -34,7 +34,11 @@ class BatteryArc extends WatchUi.Drawable {
   }
 
   hidden function drawProgressArc(dc, fillLevel) {
-    dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+    if(fillLevel < 10.0){
+        dc.setColor(Color.getColor("alert"), Graphics.COLOR_TRANSPARENT);
+    }else{
+        dc.setColor(Color.getColor("primary"), Graphics.COLOR_TRANSPARENT);
+    }
     if (fillLevel > 0.0) {
       var startDegree = mStartDegree;
       var endDegree = mStartDegree - getFillDegree(fillLevel);

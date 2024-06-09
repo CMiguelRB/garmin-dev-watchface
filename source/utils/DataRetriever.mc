@@ -55,15 +55,17 @@ module DataRetriever {
                 if(location != null){
                     var sunsetMoment = Weather.getSunset(location, now);
                     var sunriseMoment = Weather.getSunrise(location, now);
-                    sunset = Time.Gregorian.info(sunsetMoment, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunsetMoment, Time.FORMAT_MEDIUM).min.format("%02d");
-                    sunrise = Time.Gregorian.info(sunriseMoment, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunriseMoment, Time.FORMAT_MEDIUM).min.format("%02d");
-                        
-                    DataValues.sunrise = sunrise;
-                    DataValues.sunset = sunset;
-                    DataValues.sunriseMoment = sunriseMoment;
-                    DataValues.sunsetMoment = sunsetMoment;
-                    DataValues.lastSunEventsRetrieval = now;
-                    DataValues.updateSunEvents = false;
+                    if(sunsetMoment != null && sunriseMoment != null){
+                        sunset = Time.Gregorian.info(sunsetMoment, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunsetMoment, Time.FORMAT_MEDIUM).min.format("%02d");
+                        sunrise = Time.Gregorian.info(sunriseMoment, Time.FORMAT_MEDIUM).hour.format("%02d") + ":" + Time.Gregorian.info(sunriseMoment, Time.FORMAT_MEDIUM).min.format("%02d");
+                            
+                        DataValues.sunrise = sunrise;
+                        DataValues.sunset = sunset;
+                        DataValues.sunriseMoment = sunriseMoment;
+                        DataValues.sunsetMoment = sunsetMoment;
+                        DataValues.lastSunEventsRetrieval = now;
+                        DataValues.updateSunEvents = false;
+                    }
                 }        
             }   
         }
@@ -75,17 +77,21 @@ module DataRetriever {
     }
 
     function getLocation(){
-        var location = Weather.getCurrentConditions().observationLocationPosition;
-        var lastLocation = DataValues.lastLocation as Array<Double>;
-        if(location != null && lastLocation != null){
-            location = location.toDegrees();
-            if(location[0] != lastLocation[0] || location[1] != lastLocation[1]){
-                DataValues.lastLocation =  location;
+        var getCurrentConditions = Weather.getCurrentConditions();
+        var location;
+        if(getCurrentConditions != null){
+            location = Weather.getCurrentConditions().observationLocationPosition;
+            var lastLocation = DataValues.lastLocation as Array<Double>;
+            if(location != null && lastLocation != null){
+                location = location.toDegrees();
+                if(location[0] != lastLocation[0] || location[1] != lastLocation[1]){
+                    DataValues.lastLocation =  location;
+                    DataValues.updateSunEvents =  true;
+                }            
+            }else{
+                DataValues.lastLocation =  location.toDegrees();
                 DataValues.updateSunEvents =  true;
-            }            
-        }else{
-            DataValues.lastLocation =  location.toDegrees();
-            DataValues.updateSunEvents =  true;
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 import Toybox.Application;
 
 
-module Color {    
+module Color {
 
     function getColor(colorName) {
 
@@ -11,9 +11,10 @@ module Color {
           "inactive" => Properties.getValue("inactiveColor"),
           "text" => Properties.getValue("textColor"),
           "lines" => Properties.getValue("linesColor"),
-          "background" => Properties.getValue("backgroundColor")
+          "background" => Properties.getValue("backgroundColor"),
+          "alert" => Properties.getValue("alertColor"),
       };
 
       return colors[colorName].toNumberWithBase(16);
-    }  
+    }
 }
