@@ -13,7 +13,7 @@
   <string id="chartColorPrompt">xxxx</string>
   <string id="primary">Primary</string>
   <string id="secondary">Accent</string>
-  <string id="alert">Alert</string>
+  <string id="alertColorTitle">Alert</string>
 
   <string id="DateMonth1">Jan</string>
   <string id="DateMonth2">Feb</string>

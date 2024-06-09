@@ -17,6 +17,9 @@
     <setting propertyKey="@Properties.backgroundColor" title="@Strings.backgroundColorTitle">
         <settingConfig type="alphaNumeric"/>
     </setting>
+    <setting propertyKey="@Properties.alertColor" title="@Strings.alertColorTitle">
+        <settingConfig type="alphaNumeric"/>
+    </setting>
     <setting propertyKey="@Properties.chartColor" title="@Strings.chartColorTitle" prompt="@Strings.chartColorPrompt">
         <settingConfig type="list">
             <listEntry value="1">@Strings.primary</listEntry>

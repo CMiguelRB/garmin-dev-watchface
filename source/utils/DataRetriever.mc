@@ -176,6 +176,9 @@ module DataRetriever {
                 DataValues.lowTemp = currentConditions.lowTemperature.toNumber();
                 DataValues.highTemp = currentConditions.highTemperature.toNumber();
             }catch(e){}
+        }else{
+            DataValues.lowTemp = null;
+            DataValues.highTemp = null;
         }
     }
 }
